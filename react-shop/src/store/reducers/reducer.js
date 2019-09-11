@@ -1,5 +1,6 @@
 import {
 	UPDATE_BRANDS,
+	UPDATE_PRICES,
 } from '../actions/action-types';
 
 
@@ -28,6 +29,14 @@ const rootReducer = (state = initialState, action) => {
 				filter: {
 					...state.filter,
 					brands: action.brands
+				}
+			};
+		case UPDATE_PRICES:
+			return {
+				...state,
+				filter: {
+					...state.filter,
+					prices: action.prices
 				}
 			};
 		default:

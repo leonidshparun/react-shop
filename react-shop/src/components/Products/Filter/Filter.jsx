@@ -5,7 +5,10 @@ import Checkbox from './../../UI/CheckBox/Checkbox';
 import styled from 'styled-components';
 
 import { connect } from "react-redux";
-import { updateBrands } from "../../../store/actions/actions";
+import {
+	updateBrands,
+	updatePrices,
+} from "../../../store/actions/actions";
 
 const FilterContainer = styled.div`
 		display: flex;
@@ -23,6 +26,16 @@ const Brands = styled.div`
 		margin: 10px;
 	`
 
+const Prices = styled.div`
+		display: flex;
+		flex-flow: column;
+		border: 1px solid grey;
+		padding: 10px;
+		margin: 10px;
+		input {
+			width: 100px;
+		}
+	`
 
 class FilterConnected extends Component {
 
@@ -30,6 +43,12 @@ class FilterConnected extends Component {
 		const brands = { ...this.props.brands };
 		brands[brand] = !this.props.brands[brand];
 		this.props.updateBrands(brands);
+	}
+
+	handlePriceChange = (e, type) => {
+		const prices = [...this.props.prices];
+		prices[type] = e.target.value;
+		this.props.updatePrices(prices);
 	}
 
 	render() {
@@ -47,13 +66,29 @@ class FilterConnected extends Component {
 							</span>
 						</label>)}
 				</Brands>
+				<Prices>
+					<label>
+						from:
+          <input
+							type="text"
+							value={this.props.prices[0]}
+							onChange={(e) => this.handlePriceChange(e, 0)} />
+					</label>
+					<label>
+						to:
+						<input
+							type="text"
+							value={this.props.prices[1]}
+							onChange={(e) => this.handlePriceChange(e, 1)} />
+					</label>
+				</Prices>
 				{/* <p>
 				{params.prices}
 			</p>
 			<p>
 				{params.sizes}
 			</p> */}
-			</FilterContainer>
+			</FilterContainer >
 		);
 	}
 
@@ -68,6 +103,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		updateBrands: brands => dispatch(updateBrands(brands)),
+		updatePrices: prices => dispatch(updatePrices(prices)),
 	};
 }
 
