@@ -1,0 +1,338 @@
+{
+	"products": [
+		{
+			"id": 1,
+			"brand": "NIKE",
+			"title": "AIR MAX 270 REACT POP ART",
+			"style": "ELECTRO GREEN/YELLOW OCHRE",
+			"availableSizes": [
+				40,
+				40.5,
+				41,
+				42,
+				42.5,
+				43,
+				44,
+				44.5,
+				45,
+				45.5,
+				46
+			],
+			"price": 159.00,
+			"currencyId": "EUR",
+			"currencyFormat": "€",
+			"isFreeShipping": true
+		},
+		{
+			"id": 2,
+			"brand": "ASICS",
+			"title": "GEL-KAYANO 5 OG",
+			"style": "BIRCH/BLUE EXPANSE",
+			"availableSizes": [
+				40,
+				40.5,
+				41,
+				42,
+				42.5,
+				43
+			],
+			"price": 139.00,
+			"currencyId": "EUR",
+			"currencyFormat": "€",
+			"isFreeShipping": true
+		},
+		{
+			"id": 3,
+			"brand": "NIKE",
+			"title": "AIR MAX 270 REACT GEOMETRIC ART",
+			"style": "WHITE/DYNAMIC YELLOW",
+			"availableSizes": [
+				40,
+				41,
+				42,
+				43,
+				44,
+				45,
+				46
+			],
+			"price": 159.00,
+			"currencyId": "EUR",
+			"currencyFormat": "€",
+			"isFreeShipping": true
+		},
+		{
+			"id": 4,
+			"brand": "JORDAN",
+			"title": "AIR JORDAN 4 RETRO SE",
+			"style": "FIBA",
+			"availableSizes": [
+				40,
+				41,
+				42,
+				43,
+				44,
+				45,
+				46
+			],
+			"price": 189.00,
+			"currencyId": "EUR",
+			"currencyFormat": "€",
+			"isFreeShipping": true
+		},
+		{
+			"id": 5,
+			"brand": "NIKE",
+			"title": "AIR MAX 90 QS VIOTECH",
+			"style": "HYPER GRAPE",
+			"availableSizes": [
+				38,
+				39,
+				40,
+				41,
+				42
+			],
+			"price": 140.00,
+			"currencyId": "EUR",
+			"currencyFormat": "€",
+			"isFreeShipping": true
+		},
+		{
+			"id": 6,
+			"brand": "ASICS",
+			"title": "GEL-LYTE III",
+			"style": "WHITE/BLACK",
+			"availableSizes": [
+				40,
+				41,
+				42,
+				43,
+				44,
+				45,
+				45.5
+			],
+			"price": 119.00,
+			"currencyId": "EUR",
+			"currencyFormat": "€",
+			"isFreeShipping": true
+		},
+		{
+			"id": 7,
+			"brand": "REEBOK",
+			"title": "AZTREK 96 ADVENTURE",
+			"style": "BUFF/TRUE GREY",
+			"availableSizes": [
+				40,
+				41,
+				42,
+				43,
+				44,
+				45,
+				45.5,
+				46
+			],
+			"price": 99.00,
+			"currencyId": "EUR",
+			"currencyFormat": "€",
+			"isFreeShipping": true
+		},
+		{
+			"id": 8,
+			"brand": "NIKE",
+			"title": "ACG REACT TERRA GOBE",
+			"style": "BRIGHT CRIMSON/VIVID PURPLE",
+			"availableSizes": [
+				40,
+				40.5,
+				41,
+				42,
+				42.5,
+				43,
+				44
+			],
+			"price": 149.00,
+			"currencyId": "EUR",
+			"currencyFormat": "€",
+			"isFreeShipping": true
+		},
+		{
+			"id": 9,
+			"brand": "ADIDAS",
+			"title": "LXCON 94",
+			"style": "CRYSTAL WHITE/COLLEGIATE ROYAL",
+			"availableSizes": [
+				40,
+				40.5,
+				41,
+				42,
+				42.5,
+				43,
+				44,
+				44.5,
+				45,
+				45.5,
+				46
+			],
+			"price": 129.00,
+			"currencyId": "EUR",
+			"currencyFormat": "€",
+			"isFreeShipping": true
+		},
+		{
+			"id": 10,
+			"brand": "JORDAN",
+			"title": "AIR JORDAN 4 RETRO",
+			"style": "COOL GREY",
+			"availableSizes": [
+				44,
+				44.5,
+				45,
+				45.5,
+				46
+			],
+			"price": 179.00,
+			"currencyId": "EUR",
+			"currencyFormat": "€",
+			"isFreeShipping": true
+		},
+		{
+			"id": 11,
+			"brand": "ASICS",
+			"title": "GEL-BND",
+			"style": "WHITE/CLASSIC RED",
+			"availableSizes": [
+				40,
+				40.5,
+				41,
+				42,
+				43,
+				44,
+				45
+			],
+			"price": 79.00,
+			"currencyId": "EUR",
+			"currencyFormat": "€",
+			"isFreeShipping": true
+		},
+		{
+			"id": 12,
+			"brand": "ASICS",
+			"title": "GEL KAYANO 5 OG",
+			"style": "MIDNIGHT/WHITE",
+			"availableSizes": [
+				37,
+				38,
+				39,
+				40,
+				40.5,
+				41,
+				42,
+				42.5,
+				43,
+				44,
+				44.5,
+				45,
+				45.5,
+				46
+			],
+			"price": 139.00,
+			"currencyId": "EUR",
+			"currencyFormat": "€",
+			"isFreeShipping": true
+		},
+		{
+			"id": 13,
+			"brand": "PUMA",
+			"title": "RS-X COLOUR THEORY",
+			"style": "WHISPER WHITE",
+			"availableSizes": [
+				40,
+				40.5,
+				41,
+				42,
+				42.5,
+				43
+			],
+			"price": 129.00,
+			"currencyId": "EUR",
+			"currencyFormat": "€",
+			"isFreeShipping": true
+		},
+		{
+			"id": 14,
+			"brand": "NIKE",
+			"title": "W AIR MAX TAILWIND 4",
+			"style": "RAINBOW",
+			"availableSizes": [
+				37,
+				38,
+				39,
+				40,
+				40.5,
+				41,
+				42,
+				42.5,
+				43,
+				44,
+				44.5,
+				45,
+				45.5,
+				46
+			],
+			"price": 169.00,
+			"currencyId": "EUR",
+			"currencyFormat": "€",
+			"isFreeShipping": true
+		},
+		{
+			"id": 15,
+			"brand": "PUMA",
+			"title": "CELL ALIEN OG",
+			"style": "WHITE/ORANGE",
+			"availableSizes": [
+				41,
+				42,
+				42.5,
+				43,
+				44,
+				44.5
+			],
+			"price": 119.00,
+			"currencyId": "EUR",
+			"currencyFormat": "€",
+			"isFreeShipping": true
+		},
+		{
+			"id": 16,
+			"brand": "REEBOK",
+			"title": "DMX SERIES 1000",
+			"style": "ALABASTER/NAVY",
+			"availableSizes": [
+				40,
+				41,
+				42
+			],
+			"price": 89.00,
+			"currencyId": "EUR",
+			"currencyFormat": "€",
+			"isFreeShipping": true
+		},
+		{
+			"id": 17,
+			"brand": "REEBOK",
+			"title": "AZTREK",
+			"style": "PLEASURES",
+			"availableSizes": [
+				42,
+				42.5,
+				43,
+				44,
+				44.5,
+				45
+			],
+			"price": 129.00,
+			"currencyId": "EUR",
+			"currencyFormat": "€",
+			"isFreeShipping": true
+		}
+	]
+}
