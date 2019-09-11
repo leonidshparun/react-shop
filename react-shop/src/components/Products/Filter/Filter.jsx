@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 
-import Checkbox from './../../UI/CheckBox/Checkbox';
-import SizeSelector from './../../Card/SizeSelector/SizeSelector';
+import Brands from './Brands/Brands';
+import Prices from './Prices/Prices';
+import Sizes from './Sizes/Sizes';
 
 import styled from 'styled-components';
 
@@ -17,27 +18,8 @@ const FilterContainer = styled.div`
 		flex-flow: column;
 		justify-content: flex-start;
 		align-items: center;
-		min-width: 160px;
-	`
-
-const Brands = styled.div`
-		display: flex;
-		flex-flow: column;
-		border: 1px solid grey;
-		padding: 10px;
-		margin: 10px;
-	`
-
-const Prices = styled.div`
-		display: flex;
-		flex-flow: column;
-		border: 1px solid grey;
-		padding: 10px;
-		margin: 10px;
-
-		input {
-			width: 100px;
-		}
+	 	min-width: 230px;
+		height: 100%;
 	`
 
 class FilterConnected extends Component {
@@ -49,57 +31,53 @@ class FilterConnected extends Component {
 		this.props.updateBrands(brands);
 	}
 
+	clearBrands = () => {
+		const brands = { ...this.props.brands };
+		for (const brand in brands) {
+			brands[brand] = false;
+		}
+		this.props.updateBrands(brands);
+	}
+
 	handlePriceChange = (e, type) => {
 		const prices = [...this.props.prices];
 		prices[type] = e.target.value;
 		this.props.updatePrices(prices);
 	}
 
-	handleSizeChange = (e) => {
+	handleSizeChange = (size) => {
 		const sizes = {};
-		sizes[e] = this.props.sizes.length === 1 ?
-			!this.props.sizes[e] :
+		sizes[size] = this.props.sizes.length === 1 ?
+			!this.props.sizes[size] :
 			true;
+		this.props.updateSizes(sizes);
+	}
+
+	selectAllSizes = () => {
+		const sizes = {};
+		for (const size of this.sizes) {
+			sizes[size] = true;
+		}
 		this.props.updateSizes(sizes);
 	}
 
 	render() {
 		return (
 			<FilterContainer>
-				<Brands>
-					{Object.keys(this.props.brands).map((brand) =>
-						<label key={brand}>
-							<Checkbox
-								checked={this.props.brands[brand]}
-								onChange={() => this.handleBrandChange(brand)}
-							/>
-							<span style={{ marginLeft: 8, fontSize: 18 }}>
-								{brand}
-							</span>
-						</label>)}
-				</Brands>
-				<Prices>
-					<label>
-						from:
-          <input
-							type="text"
-							value={this.props.prices[0]}
-							onChange={(e) => this.handlePriceChange(e, 0)} />
-					</label>
-					<label>
-						to:
-						<input
-							type="text"
-							value={this.props.prices[1]}
-							onChange={(e) => this.handlePriceChange(e, 1)} />
-					</label>
-				</Prices>
+				<Brands
+					brands={this.props.brands}
+					change={this.handleBrandChange}
+					clear={this.clearBrands} />
 
-				<SizeSelector
-					data={this.sizes}
-					select={(size) => this.handleSizeChange(size)}
-					selected={Object.keys(this.props.sizes)}
-				/>
+				<Prices
+					prices={this.props.prices}
+					change={this.handlePriceChange} />
+
+				<Sizes
+					initial={this.sizes}
+					sizes={this.props.sizes}
+					change={this.handleSizeChange}
+					select={this.selectAllSizes} />
 			</FilterContainer >
 		);
 	}

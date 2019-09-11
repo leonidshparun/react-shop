@@ -16,7 +16,6 @@ const ProductsContainer = styled.div`
 class ProductsConnected extends Component {
 
 	render() {
-		console.log(data);
 		const filtredList = data.products
 			.filter(product => this.props.brands[product.brand])
 			.filter(product => {

@@ -7,7 +7,7 @@ import {
 
 import Button from '../UI/Button/Button';
 
-import SizeSelector from './SizeSelector/SizeSelector';
+import Selector from './../UI/Selector/Selector';
 
 class Card extends Component {
 	state = {
@@ -32,13 +32,13 @@ class Card extends Component {
 				<img
 					src={require(`../../static/img/item${this.props.data.id}.jpg`)}
 					alt={this.props.data.title}
-					width='260px' />
+					width='250px' />
 
 				<Heading>
 					{`${this.props.data.brand} ${this.props.data.title} - ${this.props.data.style}`}
 				</Heading>
 
-				<SizeSelector
+				<Selector
 					selected={this.state.selectedSize}
 					data={this.props.data.availableSizes}
 					select={(size) => this.handleChange(size)}
