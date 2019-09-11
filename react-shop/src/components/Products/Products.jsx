@@ -15,15 +15,15 @@ const ProductsContainer = styled.div`
 
 class ProductsConnected extends Component {
 
-
 	render() {
+		console.log(data);
 		const filtredList = data.products
 			.filter(product => this.props.brands[product.brand])
 			.filter(product => {
 				const [min, max] = this.props.prices;
 				return (product.price >= min && product.price <= max)
 			})
-			.filter(product => product.availableSizes.some(size => this.props.sizes.includes(size)))
+			.filter(product => product.availableSizes.some(size => this.props.sizes[size]))
 			.map(product => <Card
 				key={product.id}
 				data={product}

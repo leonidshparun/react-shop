@@ -10,23 +10,20 @@ import Button from '../UI/Button/Button';
 import SizeSelector from './SizeSelector/SizeSelector';
 
 class Card extends Component {
-	constructor() {
-		super();
-		this.state = {
-			selectedSize: '',
-		};
+	state = {
+		selectedSize: []
 	}
 
 	handleChange = (size) => {
 		this.setState({
-			selectedSize: size,
+			selectedSize: [size],
 		});
 	}
 
 	handleSubmit = (event) => {
 		event.preventDefault();
-		if (!this.state.selectedSize) alert(`Choose size, please`);
-		else alert(`You chose the ${this.state.selectedSize}.`);
+		if (!this.state.selectedSize[0]) alert(`Choose size, please`);
+		else alert(`You chose the ${this.state.selectedSize[0]}.`);
 	}
 
 	render() {
@@ -42,9 +39,9 @@ class Card extends Component {
 				</Heading>
 
 				<SizeSelector
+					selected={this.state.selectedSize}
 					data={this.props.data.availableSizes}
 					select={(size) => this.handleChange(size)}
-					selected={this.state.selectedSize}
 				/>
 
 				<Price>

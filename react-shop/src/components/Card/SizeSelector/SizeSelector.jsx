@@ -6,8 +6,9 @@ const Sizes = styled.div`
 	flex-wrap: wrap;
 	justify-content: center;
 	align-content: space-around;
-	height: 60px;
+	min-height: 60px;
 	width: 100%;
+	max-width: 200px;
 	overflow: auto;
 	::-webkit-scrollbar { 
     display: none; 
@@ -22,16 +23,19 @@ const Size = styled.p`
 	user-select: none;
 `;
 
-const SizeSelector = props => <Sizes>
-	{props.data.map(size =>
-		<Size
-			onClick={() => props.select(size)}
-			key={size}
-			status={+props.selected === size}>
-			{size}
-		</Size>
-	)}
-</Sizes>;
+const SizeSelector = props => {
+	return <Sizes>
+		{props.data.map(size =>
+			<Size
+				onClick={() => props.select(size)}
+				key={size}
+				status={props.selected.includes(size)}
+			>
+				{size}
+			</Size>
+		)}
+	</Sizes>
+};
 
 
 export default SizeSelector;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Checkbox from './../../UI/CheckBox/Checkbox';
+import SizeSelector from './../../Card/SizeSelector/SizeSelector';
 
 import styled from 'styled-components';
 
@@ -8,6 +9,7 @@ import { connect } from "react-redux";
 import {
 	updateBrands,
 	updatePrices,
+	updateSizes,
 } from "../../../store/actions/actions";
 
 const FilterContainer = styled.div`
@@ -32,12 +34,14 @@ const Prices = styled.div`
 		border: 1px solid grey;
 		padding: 10px;
 		margin: 10px;
+
 		input {
 			width: 100px;
 		}
 	`
 
 class FilterConnected extends Component {
+	sizes = Object.keys(this.props.sizes);
 
 	handleBrandChange = (brand) => {
 		const brands = { ...this.props.brands };
@@ -49,6 +53,14 @@ class FilterConnected extends Component {
 		const prices = [...this.props.prices];
 		prices[type] = e.target.value;
 		this.props.updatePrices(prices);
+	}
+
+	handleSizeChange = (e) => {
+		const sizes = {};
+		sizes[e] = this.props.sizes.length === 1 ?
+			!this.props.sizes[e] :
+			true;
+		this.props.updateSizes(sizes);
 	}
 
 	render() {
@@ -82,12 +94,12 @@ class FilterConnected extends Component {
 							onChange={(e) => this.handlePriceChange(e, 1)} />
 					</label>
 				</Prices>
-				{/* <p>
-				{params.prices}
-			</p>
-			<p>
-				{params.sizes}
-			</p> */}
+
+				<SizeSelector
+					data={this.sizes}
+					select={(size) => this.handleSizeChange(size)}
+					selected={Object.keys(this.props.sizes)}
+				/>
 			</FilterContainer >
 		);
 	}
@@ -104,6 +116,7 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		updateBrands: brands => dispatch(updateBrands(brands)),
 		updatePrices: prices => dispatch(updatePrices(prices)),
+		updateSizes: sizes => dispatch(updateSizes(sizes)),
 	};
 }
 
