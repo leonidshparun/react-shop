@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
+
 import Card from '../../components/Card/Card';
 import Filter from './Filter/Filter';
+import Content from '../Content/Content';
 
 import data from '../../static/products/products.json';
 
 import styled from 'styled-components';
 import { connect } from "react-redux";
 
+import {
+	addItemToCart,
+} from "../../store/actions/actions";
+
 const ProductsContainer = styled.div`
 		display: flex;
 		flex-flow: row;
 		width: 100%;
-	`
+		justify-content: space-around;
+	`;
 
 class ProductsConnected extends Component {
 
@@ -26,14 +33,13 @@ class ProductsConnected extends Component {
 			.map(product => <Card
 				key={product.id}
 				data={product}
+				add={this.props.addItemToCart}
 			/>)
 
 		return (
 			<ProductsContainer>
 				<Filter />
-				<div style={{ display: 'flex', flexWrap: 'wrap' }}>
-					{filtredList}
-				</div>
+				<Content data={filtredList} />
 			</ProductsContainer>
 		);
 	}
@@ -46,12 +52,12 @@ const mapStateToProps = (state) => {
 	};
 }
 
-// const mapDispatchToProps = (dispatch) => {
-// 	return {
-// 		updateBrands: brands => dispatch(updateBrands(brands)),
-// 	};
-// }
+const mapDispatchToProps = (dispatch) => {
+	return {
+		addItemToCart: item => dispatch(addItemToCart(item)),
+	};
+}
 
-const Products = connect(mapStateToProps)(ProductsConnected);
+const Products = connect(mapStateToProps, mapDispatchToProps)(ProductsConnected);
 
 export default Products;
