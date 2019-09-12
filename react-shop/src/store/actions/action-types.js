@@ -3,3 +3,4 @@ export const UPDATE_PRICES = "UPDATE_PRICES";
 export const UPDATE_SIZES = "UPDATE_SIZES";
 
 export const ADD_ITEM = "ADD_ITEM";
+export const REMOVE_ITEM = "REMOVE_ITEM";

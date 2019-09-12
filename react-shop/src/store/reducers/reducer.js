@@ -3,6 +3,7 @@ import {
 	UPDATE_PRICES,
 	UPDATE_SIZES,
 	ADD_ITEM,
+	REMOVE_ITEM,
 } from '../actions/action-types';
 
 import data from '../../static/products/products.json';
@@ -60,6 +61,13 @@ const rootReducer = (state = initialState, action) => {
 				cart: [
 					...state.cart,
 					action.item,
+				]
+			};
+		case REMOVE_ITEM:
+			return {
+				...state,
+				cart: [
+					...action.items,
 				]
 			};
 

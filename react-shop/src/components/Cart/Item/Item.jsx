@@ -4,24 +4,20 @@ import styled from 'styled-components';
 
 const Container = styled.div`
 	height: 70px;
-	width: 100%;
 	display: flex;
 	justify-content: space-between;
-	margin: 5px 0;
+	margin: 10px;
 	padding: 5px;
 	position: relative;
-	border: 1px solid #ccc;	
-	background-color: #b38afb;
+	background-color: #03A9F4;
 
 	button {
 		position: absolute;
 		top: 10px;
 		right: 15px;
 		font-size: 16px;
-		border-radius: 50%;
 		width: 20px;
 		height: 20px;
-		background-color: #795548;
 		color: white;
 	}
 `;
@@ -42,7 +38,7 @@ const Description = styled.div`
 	color: black;
 `;
 
-const Item = ({ item, product }) => {
+const Item = ({ item, product, remove }) => {
 	return (
 		<Container>
 			<img
@@ -54,7 +50,7 @@ const Item = ({ item, product }) => {
 				<p>Size: {item.size}</p>
 			</Description>
 			<Price>{product.price} €</Price>
-			<button>X</button>
+			<button onClick={remove}>X</button>
 		</Container>
 	);
 }

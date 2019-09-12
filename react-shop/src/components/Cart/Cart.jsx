@@ -11,13 +11,14 @@ import data from '../../static/products/products.json';
 import Item from './Item/Item';
 import Checkout from './Checkout/Checkout';
 
+import { removeItemFromCart } from '../../store/actions/actions';
+
 const CartContainer = styled.div`
 	width: 460px;
-	background-color: #3f51b5fa;
+	background-color: #607D8B;
 	height: 100%;
 	position: fixed;
 	top: 0;
-	padding: 10px;
 	display: flex;
 	flex-flow: column;
 	justify-content: space-between;
@@ -39,9 +40,8 @@ const ToggleIcon = styled.button`
 		top: 0;
 		height: 40px;
 		width: 40px;
-		background-color: goldenrod;
+		background-color: gold;
 		font-size: 30px;
-		border-radius: 0 0 0 10px;
 `;
 
 class CartConnected extends Component {
@@ -53,6 +53,12 @@ class CartConnected extends Component {
 		this.setState({ visible: !this.state.visible })
 	}
 
+	removeItem = (idx) => {
+		const items = [...this.props.items];
+		const updatedItems = [...items.slice(0, idx), ...items.slice(idx + 1)];
+		this.props.removeItemFromCart(updatedItems);
+	}
+
 	render() {
 		const items = this.props.items;
 		let total = 0;
@@ -60,10 +66,14 @@ class CartConnected extends Component {
 			<CartContainer show={this.state.visible}>
 				<ToggleIcon onClick={this.toggleCart}>€</ToggleIcon>
 				<Items>
-					{items.map(item => {
-						const product = data.products[item.id];
+					{items.map((item, idx) => {
+						const product = data.products[item.id - 1];
 						total += product.price;
-						return <Item key={uniqid()} product={product} item={item} />
+						return <Item
+							remove={() => this.removeItem(idx)}
+							key={uniqid()}
+							product={product}
+							item={item} />
 					})}
 				</Items>
 				<Checkout total={total} />
@@ -79,12 +89,12 @@ const mapStateToProps = (state) => {
 	};
 }
 
-// const mapDispatchToProps = (dispatch) => {
-// 	return {
-// 		updateBrands: brands => dispatch(updateBrands(brands)),
-// 	};
-// }
+const mapDispatchToProps = (dispatch) => {
+	return {
+		removeItemFromCart: items => dispatch(removeItemFromCart(items)),
+	};
+}
 
-const Cart = connect(mapStateToProps)(CartConnected);
+const Cart = connect(mapStateToProps, mapDispatchToProps)(CartConnected);
 
 export default Cart;
