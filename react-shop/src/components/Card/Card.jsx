@@ -11,7 +11,7 @@ import Selector from './../UI/Selector/Selector';
 
 class Card extends Component {
 	state = {
-		selectedSize: []
+		selectedSize: [],
 	}
 
 	handleChange = (size) => {
@@ -23,7 +23,14 @@ class Card extends Component {
 	handleSubmit = (event) => {
 		event.preventDefault();
 		if (!this.state.selectedSize[0]) alert(`Choose size, please`);
-		else alert(`You chose the ${this.state.selectedSize[0]}.`);
+		else {
+			// 	alert(`You chose the ${this.state.selectedSize[0]}. 
+			// ${this.props.data.id}
+			// ${this.props.data.brand} ${this.props.data.title} - ${this.props.data.style}`)
+			this.props.add(
+				{ id: this.props.data.id, size: this.state.selectedSize[0] }
+			)
+		};
 	}
 
 	render() {
