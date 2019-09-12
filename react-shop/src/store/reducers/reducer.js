@@ -2,8 +2,8 @@ import {
 	UPDATE_BRANDS,
 	UPDATE_PRICES,
 	UPDATE_SIZES,
+	ADD_ITEM,
 } from '../actions/action-types';
-
 
 import data from '../../static/products/products.json';
 
@@ -24,7 +24,8 @@ const initialState = {
 		brands,
 		prices,
 		sizes,
-	}
+	},
+	cart: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -52,6 +53,14 @@ const rootReducer = (state = initialState, action) => {
 					...state.filter,
 					sizes: action.sizes
 				}
+			};
+		case ADD_ITEM:
+			return {
+				...state,
+				cart: [
+					...state.cart,
+					action.item,
+				]
 			};
 
 		default:
