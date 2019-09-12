@@ -6,11 +6,9 @@ import Button from '../../UI/Button/Button';
 
 const Container = styled.div`
 	bottom: 100px;
-	border: 1px solid gray;
 	width: 100%;
 	height: 130px;
-	background-color: #b38afb;
-	border: 1px solid #ccc;	
+	background-color: #FFEB3B;
 	display: flex;
 	flex-flow: column;
 	justify-content: space-between;
@@ -18,6 +16,7 @@ const Container = styled.div`
 
 	h3 {
 		font-size: 24px;
+		padding: 5px;
 	}
 
 	p {
@@ -25,7 +24,7 @@ const Container = styled.div`
 	}
 
 	span {
-		font-size: 24px;
+		font-size: 30px;
 		font-weight: 600;
 	}
 `;
@@ -35,7 +34,7 @@ const Checkout = ({ total }) => {
 		<Container>
 			<h3>Checkout:</h3>
 			<p> Total: <span>{total} €</span></p>
-			<Button active={total} width={'100%'}>BUY</Button>
+			<Button active={total} width={'100%'} >BUY</Button>
 		</Container>
 	);
 }

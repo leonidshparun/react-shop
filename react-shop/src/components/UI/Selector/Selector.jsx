@@ -20,6 +20,10 @@ const Element = styled.span`
 	background: ${props => props.status ? '#00BCD450' : '#9e9e9e50'};
 	cursor: pointer;
 	user-select: none;
+
+	:hover {
+		background-color: #00BCD450;
+	}
 `;
 
 const Selector = props => <Container>

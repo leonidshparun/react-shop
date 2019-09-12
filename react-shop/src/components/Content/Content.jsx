@@ -5,7 +5,10 @@ import Pagination from './Pagination/Pagination';
 
 const Container = styled.div`
 	display: flex;
-	width: 100%;
+	border: 1px solid #9e9e6e50;
+	width: 1205px;
+	margin: 10px;
+	height: 870px;
 	flex-wrap: wrap;
 	place-content: start;
 `;
@@ -24,7 +27,7 @@ class Content extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			itemsPerPage: 6,
+			itemsPerPage: 8,
 			totalItems: this.props.data.length,
 			currentPage: 0,
 		}
@@ -46,6 +49,7 @@ class Content extends Component {
 				</Container>
 				<Pagination
 					pages={chunks.length}
+					active={this.state.currentPage}
 					click={this.changePageHandler} />
 			</div>
 		)

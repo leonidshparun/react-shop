@@ -17,7 +17,6 @@ const ProductsContainer = styled.div`
 		display: flex;
 		flex-flow: row;
 		width: 100%;
-		justify-content: space-around;
 	`;
 
 class ProductsConnected extends Component {

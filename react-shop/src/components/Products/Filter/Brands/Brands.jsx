@@ -7,7 +7,7 @@ import styled from 'styled-components';
 const Container = styled.div`
 		display: flex;
 		flex-flow: column;
-		background: #9e9e6e20;
+		border: 1px solid #9e9e6e50;
 		padding: 10px;
 		margin: 10px 0;
 		width: 200px;
