@@ -8,6 +8,8 @@ import styled from 'styled-components';
 
 import data from '../../static/products/products.json';
 
+import icon from '../../static/icons/shopping-cart.png'
+
 import Item from './Item/Item';
 import Checkout from './Checkout/Checkout';
 
@@ -23,25 +25,36 @@ const CartContainer = styled.div`
 	flex-flow: column;
 	justify-content: space-between;
 	right: ${props => props.show ? 0 : '-460px'};
-	transition: right 0.5s;
+	transition: right 0.2s;
 `;
 
 const Items = styled.div`
 		height: calc(100vh - 160px);
     overflow: auto;
 		::-webkit-scrollbar { 
-    display: none; 
-	}
+    	display: none; 
+		}
 `;
 
 const ToggleIcon = styled.button`
 		position: absolute;
-		left: -40px;
+		left: -50px;
 		top: 0;
-		height: 40px;
-		width: 40px;
+		height: 50px;
+		width: 50px;
 		background-color: gold;
 		font-size: 30px;
+
+		p {
+			background-color: #FF5722;
+			font-size: 16px;
+			color: white;
+			position: absolute;
+			bottom: -2px;
+			left: -2px;
+			width: 18px;
+			height: 18px;
+		}
 `;
 
 class CartConnected extends Component {
@@ -64,7 +77,10 @@ class CartConnected extends Component {
 		let total = 0;
 		return (
 			<CartContainer show={this.state.visible}>
-				<ToggleIcon onClick={this.toggleCart}>€</ToggleIcon>
+				<ToggleIcon onClick={this.toggleCart}>
+					<img src={icon} width={30} alt='toggle cart' />
+					{items.length !== 0 ? <p>{items.length}</p> : null}
+				</ToggleIcon>
 				<Items>
 					{items.map((item, idx) => {
 						const product = data.products[item.id - 1];
