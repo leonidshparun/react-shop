@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 
-import Button from '../UI/Button/Button';
+import Button from '../../UI/Button/Button';
 
-import Selector from './../UI/Selector/Selector';
+import Selector from '../../UI/Selector/Selector';
 
 import styled from 'styled-components';
+
+
+import {
+	addItemToCart,
+} from "../../../store/actions/actions";
+
+import { connect } from "react-redux";
 
 const CardContainer = styled.div`
 	height: 400px;
@@ -62,7 +69,7 @@ const Tip = styled.div`
 	}
 `;
 
-class Card extends Component {
+class CardConnected extends Component {
 	state = {
 		tipText: 'Select size',
 		showTip: false,
@@ -79,7 +86,7 @@ class Card extends Component {
 			this.setState({ showTip: true });
 			setTimeout(() => this.setState({ showTip: false, tipText: 'Select size' }), 900);
 		} else {
-			this.props.add({ id: this.props.data.id, size: this.state.selectedSize[0] });
+			this.props.addItemToCart({ id: this.props.data.id, size: this.state.selectedSize[0] });
 			this.setState({ showTip: true, tipText: 'Added' });
 			setTimeout(() => this.setState({ showTip: false }), 500);
 		};
@@ -92,7 +99,7 @@ class Card extends Component {
 					<p>{this.state.tipText}</p>
 				</Tip>
 				<img
-					src={require(`../../static/img/item${this.props.data.id}.jpg`)}
+					src={require(`../../../static/img/item${this.props.data.id}.jpg`)}
 					alt={this.props.data.title}
 					width='250px' />
 
@@ -120,5 +127,14 @@ class Card extends Component {
 		);
 	}
 }
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		addItemToCart: item => dispatch(addItemToCart(item)),
+	};
+}
+
+
+const Card = connect(null, mapDispatchToProps)(CardConnected);
 
 export default Card;

@@ -16,7 +16,7 @@ const Container = styled.div`
 			font-size: 24px;
 			margin: 10px;
 		}
-				button {
+		button {
 			position: absolute;
 			right: 20px;
 			top: 20px;
