@@ -17,21 +17,40 @@ const Link = styled.button`
 	justify-content: center;
 	align-items: center;
 	font-size: 20px;
-	background-color: ${props => props.active ? '#00BCD4' : ''}
+	background-color: ${props => props.active ? '#00BCD4' : ''};
+
+	:hover:enabled {
+		background-color: #FFEB3B;
+	}
 `;
 
 const Pagination = ({ pages, click, active }) => {
-	const links = [];
+	const pageList = [];
+
 	for (let el = 0; el < pages; el += 1) {
-		links.push(el)
+		pageList.push(<Link
+			active={el === active}
+			key={el}
+			onClick={() => click(el)}>
+			{el + 1}
+		</Link>)
 	}
+
 	return (
 		<Container>
-			{links.map(item => <Link
-				active={item === active}
-				key={item}
-				onClick={() => click(item)}>{item + 1}
-			</Link>)}
+			<Link
+				disabled={active === 0}
+				onClick={() => click(active - 1)}>
+				{'<'}
+			</Link>
+
+			{pageList}
+
+			<Link
+				disabled={active === pages - 1}
+				onClick={() => click(active + 1)}>
+				{'>'}
+			</Link>
 		</Container>
 	);
 }
