@@ -9,7 +9,8 @@ const Container = styled.div`
 	margin: 10px;
 	padding: 5px;
 	position: relative;
-	background-color: #03A9F4;
+	background-color: #CDDC39;
+	transition: all 0.5s;
 
 	button {
 		position: absolute;
