@@ -4,6 +4,7 @@ import {
 	UPDATE_SIZES,
 	ADD_ITEM,
 	REMOVE_ITEM,
+	UPDATE_SORT_PRICES,
 } from '../actions/action-types';
 
 import data from '../../static/products/products.json';
@@ -15,8 +16,7 @@ brandsAll.forEach(brand => brands[brand] = true);
 const pricesRange = [...new Set(data.products.map(product => product.price))];
 const prices = [Math.min(...pricesRange), Math.max(...pricesRange)];
 
-const sizesAll = [...new Set(data.products
-	.reduce((acc, val) => acc.concat(val.availableSizes), []))];
+const sizesAll = [...new Set(data.products.reduce((acc, val) => acc.concat(val.availableSizes), []))];
 const sizes = {};
 sizesAll.forEach(size => sizes[size] = true);
 
@@ -25,6 +25,9 @@ const initialState = {
 		brands,
 		prices,
 		sizes,
+	},
+	sort: {
+		prices: 'min'
 	},
 	cart: [],
 };
@@ -70,7 +73,14 @@ const rootReducer = (state = initialState, action) => {
 					...action.items,
 				]
 			};
-
+		case UPDATE_SORT_PRICES:
+			return {
+				...state,
+				sort: {
+					...state.sort,
+					prices: action.types
+				}
+			};
 		default:
 			return state
 	}

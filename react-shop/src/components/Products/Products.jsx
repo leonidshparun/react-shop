@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 
-import Card from '../../components/Card/Card';
 import Filter from './Filter/Filter';
+import Sort from './Sort/Sort';
 import Content from '../Content/Content';
 
 import data from '../../static/products/products.json';
 
 import styled from 'styled-components';
 import { connect } from "react-redux";
-
-import {
-	addItemToCart,
-} from "../../store/actions/actions";
 
 const ProductsContainer = styled.div`
 		display: flex;
@@ -20,25 +16,20 @@ const ProductsContainer = styled.div`
 	`;
 
 class ProductsConnected extends Component {
-
 	render() {
+		const [min, max] = this.props.filter.prices;
 		const filtredList = data.products
-			.filter(product => this.props.brands[product.brand])
-			.filter(product => {
-				const [min, max] = this.props.prices;
-				return (product.price >= min && product.price <= max)
-			})
-			.filter(product => product.availableSizes.some(size => this.props.sizes[size]))
-			.map(product => <Card
-				key={product.id}
-				data={product}
-				add={this.props.addItemToCart}
-			/>)
+			.filter(product => this.props.filter.brands[product.brand]) //filter by brands
+			.filter(product => product.price >= min && product.price <= max) //filter by prices
+			.filter(product => product.availableSizes.some(size => this.props.filter.sizes[size])) //filter by sizes
+			.sort((a, b) => this.props.sort.prices === 'min' ? a.price - b.price : b.price - a.price) //sort by prices
 
 		return (
 			<ProductsContainer>
+				<Sort />
 				<Filter />
-				<Content data={filtredList} />
+				<Content
+					data={filtredList} />
 			</ProductsContainer>
 		);
 	}
@@ -47,16 +38,10 @@ class ProductsConnected extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		...state.filter,
+		...state,
 	};
 }
 
-const mapDispatchToProps = (dispatch) => {
-	return {
-		addItemToCart: item => dispatch(addItemToCart(item)),
-	};
-}
-
-const Products = connect(mapStateToProps, mapDispatchToProps)(ProductsConnected);
+const Products = connect(mapStateToProps)(ProductsConnected);
 
 export default Products;
