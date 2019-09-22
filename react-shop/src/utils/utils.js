@@ -6,4 +6,11 @@ export const chunk = (array, size) => {
 		index += size;
 	}
 	return chunked_arr;
-}
+};
+
+export const updateObject = (oldObject, updatedProperties) => {
+	return {
+		...oldObject,
+		...updatedProperties
+	};
+};
