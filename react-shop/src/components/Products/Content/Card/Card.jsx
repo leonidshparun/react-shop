@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 
-import Button from '../../UI/Button/Button';
+import Button from '../../../UI/Button/Button';
 
-import Selector from '../../UI/Selector/Selector';
+import Selector from '../../../UI/Selector/Selector';
 
 import styled from 'styled-components';
 
-
 import {
 	addItemToCart,
-} from "../../../store/actions/actions";
+} from "../../../../store/actions/actions";
 
 import { connect } from "react-redux";
 
@@ -76,6 +75,8 @@ class CardConnected extends Component {
 		selectedSize: [],
 	}
 
+	timer = null;
+
 	handleChange = (size) => {
 		this.setState({ selectedSize: [size] });
 	}
@@ -84,12 +85,17 @@ class CardConnected extends Component {
 		event.preventDefault();
 		if (!this.state.selectedSize[0]) {
 			this.setState({ showTip: true });
-			setTimeout(() => this.setState({ showTip: false, tipText: 'Select size' }), 900);
+			this.timer = setTimeout(() => this.setState({ showTip: false, tipText: 'Select size' }), 900);
 		} else {
 			this.props.addItemToCart({ id: this.props.data.id, size: this.state.selectedSize[0] });
 			this.setState({ showTip: true, tipText: 'Added' });
-			setTimeout(() => this.setState({ showTip: false }), 500);
+			this.timer = setTimeout(() => this.setState({ showTip: false }), 500);
 		};
+	}
+
+	componentWillUnmount() {
+		console.log('unmount card')
+		clearTimeout(this.timer)
 	}
 
 	render() {
@@ -99,7 +105,7 @@ class CardConnected extends Component {
 					<p>{this.state.tipText}</p>
 				</Tip>
 				<img
-					src={require(`../../../static/img/item${this.props.data.id}.jpg`)}
+					src={require(`../../../../static/img/item${this.props.data.id}.jpg`)}
 					alt={this.props.data.title}
 					width='250px' />
 
