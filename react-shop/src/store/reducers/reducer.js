@@ -1,88 +1,13 @@
-import {
-	UPDATE_BRANDS,
-	UPDATE_PRICES,
-	UPDATE_SIZES,
-	ADD_ITEM,
-	REMOVE_ITEM,
-	UPDATE_SORT_PRICES,
-} from '../actions/action-types';
+import { combineReducers } from 'redux';
 
-import data from '../../static/products/products.json';
+import cartReducer from './cart/cart';
+import filterReducer from './filter/filter';
+import sortReducer from './sort/sort';
 
-const brandsAll = [...new Set(data.products.map(product => product.brand))];
-const brands = {};
-brandsAll.forEach(brand => brands[brand] = true);
+const rootReducer = combineReducers({
+	cart: cartReducer,
+	filter: filterReducer,
+	sort: sortReducer,
+})
 
-const pricesRange = [...new Set(data.products.map(product => product.price))];
-const prices = [Math.min(...pricesRange), Math.max(...pricesRange)];
-
-const sizesAll = [...new Set(data.products.reduce((acc, val) => acc.concat(val.availableSizes), []))];
-const sizes = {};
-sizesAll.forEach(size => sizes[size] = true);
-
-const initialState = {
-	filter: {
-		brands,
-		prices,
-		sizes,
-	},
-	sort: {
-		prices: 'min'
-	},
-	cart: [],
-};
-
-const rootReducer = (state = initialState, action) => {
-	switch (action.type) {
-		case UPDATE_BRANDS:
-			return {
-				...state,
-				filter: {
-					...state.filter,
-					brands: action.brands
-				}
-			};
-		case UPDATE_PRICES:
-			return {
-				...state,
-				filter: {
-					...state.filter,
-					prices: action.prices
-				}
-			};
-		case UPDATE_SIZES:
-			return {
-				...state,
-				filter: {
-					...state.filter,
-					sizes: action.sizes
-				}
-			};
-		case ADD_ITEM:
-			return {
-				...state,
-				cart: [
-					...state.cart,
-					action.item,
-				]
-			};
-		case REMOVE_ITEM:
-			return {
-				...state,
-				cart: [
-					...action.items,
-				]
-			};
-		case UPDATE_SORT_PRICES:
-			return {
-				...state,
-				sort: {
-					...state.sort,
-					prices: action.types
-				}
-			};
-		default:
-			return state
-	}
-}
 export default rootReducer;
