@@ -15,7 +15,7 @@ const PricesContainer = styled.div`
 class Prices extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { value: 'min' };
+		this.state = { value: 'init' };
 	}
 
 	handleChange = (event) => {
@@ -28,6 +28,7 @@ class Prices extends Component {
 			<PricesContainer>
 				<span>Order by:</span>
 				<select value={this.state.value} onChange={this.handleChange}>
+					<option value="init">Select</option>
 					<option value="min">From lowest to highest</option>
 					<option value="max">From highest to lowest</option>
 				</select>
