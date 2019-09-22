@@ -18,7 +18,6 @@ const FilterContainer = styled.div`
 		flex-flow: column;
 		justify-content: flex-start;
 		align-items: center;
-	 	min-width: 230px;
 		height: 100%;
 	`
 

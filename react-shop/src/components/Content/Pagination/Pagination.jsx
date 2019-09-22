@@ -6,6 +6,9 @@ const Container = styled.div`
 	display: flex;
 	justify-content: center;
 	width: 100%;
+	
+	border: 1px solid #9e9e6e50;
+	padding: 10px;
 `;
 
 const Link = styled.button`
@@ -18,6 +21,7 @@ const Link = styled.button`
 	align-items: center;
 	font-size: 20px;
 	background-color: ${props => props.active ? '#00BCD4' : ''};
+
 
 	:hover:enabled {
 		background-color: #FFEB3B;

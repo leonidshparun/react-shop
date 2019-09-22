@@ -15,15 +15,16 @@ const SortContainer = styled.div`
 		flex-flow: row;
 		justify-content: flex-start;
 		align-items: center;
-	 	min-width: 230px;
-		height: 100%;
+		border: 1px solid #9e9e6e50;
+		height: 50px;
+		padding: 10px;
 	`
 
-const SortConnected = (props) =>
+const SortConnected = ({ prices, updateSortPrices }) =>
 	<SortContainer>
 		<Prices
-			prices={props.prices}
-			change={props.updateSortPrices} />
+			prices={prices}
+			change={updateSortPrices} />
 	</SortContainer >
 
 const mapStateToProps = (state) => {

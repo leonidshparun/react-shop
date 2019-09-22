@@ -26,14 +26,14 @@ class ProductsConnected extends Component {
 
 		return (
 			<ProductsContainer>
-				<Sort />
 				<Filter />
-				<Content
-					data={filtredList} />
+				<div>
+					<Sort />
+					<Content data={filtredList} />
+				</div>
 			</ProductsContainer>
 		);
 	}
-
 }
 
 const mapStateToProps = (state) => {

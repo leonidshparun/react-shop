@@ -30,7 +30,7 @@ class Modal extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			showModal: true,
+			showModal: false,
 			content: 'MODAL CONTENT',
 		};
 		this.el = document.createElement('div');
@@ -52,7 +52,7 @@ class Modal extends React.Component {
 
 	componentDidMount() {
 		modalRoot.appendChild(this.el);
-		this.setTimer(1000);
+		// this.setTimer(1000);
 	}
 
 	componentWillUnmount() {

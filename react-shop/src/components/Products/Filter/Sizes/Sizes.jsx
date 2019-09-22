@@ -9,7 +9,6 @@ const Container = styled.div`
 		flex-flow: column;
 		border: 1px solid #9e9e6e50;
 		padding: 10px;
-		margin: 10px 0;
 		width: 200px;
 		position: relative;
 		p {

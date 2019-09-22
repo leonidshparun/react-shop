@@ -16,7 +16,7 @@ import { connect } from "react-redux";
 const CardContainer = styled.div`
 	height: 400px;
 	width: 260px;
-	margin: 20px;
+	margin: 10px;
 	border: thin solid #9e9e6e50;
 	padding: 3px;
 
@@ -28,7 +28,7 @@ const CardContainer = styled.div`
 	transition: border-color 0.2s;
 	position: relative;
 	background-color: ${props => props.show ? 'honeydew' : ''};
-	
+
 	:hover {
 		border: thin solid #009288;
 	}
