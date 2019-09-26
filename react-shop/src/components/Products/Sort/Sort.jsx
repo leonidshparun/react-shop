@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { updateSortPrices } from '../../../store/actions/actions';
 
 import Prices from './Prices/Prices';
+import Search from '../Filter/Search/Search';
 
 const SortContainer = styled.div`
   display: flex;
@@ -19,6 +20,7 @@ const SortContainer = styled.div`
 const SortConnected = ({ prices, updateSortForPrices }) => (
   <SortContainer>
     <Prices prices={prices} change={updateSortForPrices} />
+    <Search />
   </SortContainer>
 );
 

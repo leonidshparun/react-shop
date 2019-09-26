@@ -1,7 +1,8 @@
 import {
   UPDATE_BRANDS,
   UPDATE_PRICES,
-  UPDATE_SIZES
+  UPDATE_SIZES,
+  UPDATE_SEARCH
 } from '../../actions/action-types';
 
 import data from '../../../static/products/products.json';
@@ -30,7 +31,8 @@ sizesAll.forEach(size => {
 const initialState = {
   brands,
   prices,
-  sizes
+  sizes,
+  search: ''
 };
 
 const filterReducer = (state = initialState, action) => {
@@ -41,6 +43,8 @@ const filterReducer = (state = initialState, action) => {
       return updateObject(state, { prices: action.prices });
     case UPDATE_SIZES:
       return updateObject(state, { sizes: action.sizes });
+    case UPDATE_SEARCH:
+      return updateObject(state, { search: action.input });
     default:
       return state;
   }

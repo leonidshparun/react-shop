@@ -41,7 +41,13 @@ class ContentConnected extends Component {
     console.log('VERY HARD CALCULATIONS');
     const { filter, sort } = this.props;
     const [min, max] = filter.prices;
+    let { search } = filter;
+    search = search.toLowerCase();
     return data.products
+      .filter(product => {
+        const itemSearch = `${product.brand} ${product.title} ${product.style}`.toLowerCase();
+        return itemSearch.includes(search);
+      }) // searchbar
       .filter(product => filter.brands[product.brand]) // filter by brands
       .filter(product => product.price >= min && product.price <= max) // filter by prices
       .filter(product =>

@@ -1,14 +1,45 @@
 import React from 'react';
 
-import FiltersWrapper from '../Filter.styled';
+import { connect } from 'react-redux';
 
-const Search = ({ brands, change }) => {
+import styled from 'styled-components';
+
+import { updateSearch } from '../../../../store/actions/actions';
+
+import { debounce } from '../../../../utils/utils';
+
+const SearchContainer = styled.div`
+  display: flex;
+  align-items: center;
+  p {
+    font-size: 18px;
+  }
+  input {
+    margin: 10px;
+    font-size: 18px;
+  }
+`;
+
+const SearchConnected = props => {
   return (
-    <FiltersWrapper>
+    <SearchContainer>
       <p>Search: </p>
-      <input />
-    </FiltersWrapper>
+      <input onInput={e => props.updateSearch(e.target.value)} />
+    </SearchContainer>
   );
 };
+
+const mapStateToProps = state => ({
+  input: state.filter.search
+});
+
+const mapDispatchToProps = dispatch => ({
+  updateSearch: debounce(brands => dispatch(updateSearch(brands)), 1000)
+});
+
+const Search = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SearchConnected);
 
 export default Search;
