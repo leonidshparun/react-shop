@@ -1,146 +1,101 @@
 import React, { Component } from 'react';
 
-import Button from '../../../UI/Button/Button';
+import { connect } from 'react-redux';
 
 import Selector from '../../../UI/Selector/Selector';
 
-import styled from 'styled-components';
+import { addItemToCart } from '../../../../store/actions/actions';
 
 import {
-	addItemToCart,
-} from "../../../../store/actions/actions";
-
-import { connect } from "react-redux";
-
-const CardContainer = styled.div`
-	height: 400px;
-	width: 260px;
-	margin: 10px;
-	border: thin solid #9e9e6e50;
-	padding: 3px;
-
-	display: flex;
-	flex-flow: column;
-	justify-content: space-between;
-	align-items: center;
-	user-select: none;
-	transition: border-color 0.2s;
-	position: relative;
-	background-color: ${props => props.show ? 'honeydew' : ''};
-
-	:hover {
-		border: thin solid #009288;
-	}
-`;
-
-const Heading = styled.p`
-	font-weight: 600;
-	text-align: center;
-	height: 50px;
-	display: flex;
-	align-items: center;
-`;
-
-const Price = styled.p`
-	font-size: 24px;
-	font-weight: 600;
-	color: #0b5a53;
-`;
-
-const Tip = styled.div`
-	background-color: #009688d1;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	position: absolute;
-	height: calc(100% - 6px);
-	width: calc(100% - 6px);    
-	visibility: ${props => props.show ? 'visible' : 'hidden'};
-
-	p {
-		width: 100%;
-    text-align: center;
-    font-size: 24px;
-    font-weight: 600;
-    color: white;
-    background: #FFC107;
-    padding: 10px;
-	}
-`;
+  CardContainer,
+  ProductName,
+  Price,
+  Tip,
+  AddToCartButton
+} from './Card.styled';
 
 class CardConnected extends Component {
-	state = {
-		tipText: 'Select size',
-		showTip: false,
-		selectedSize: [],
-	}
+  constructor(props) {
+    super(props);
+    this.state = {
+      tipText: 'Select size',
+      showTip: false,
+      selectedSize: []
+    };
+    this.timer = null;
+  }
 
-	timer = null;
+  componentWillUnmount() {
+    // console.log('unmount card', this.props.data.id)
+    clearTimeout(this.timer);
+  }
 
-	handleChange = (size) => {
-		this.setState({ selectedSize: [size] });
-	}
+  handleChange = size => {
+    this.setState({ selectedSize: [size] });
+  };
 
-	handleSubmit = (event) => {
-		event.preventDefault();
-		if (!this.state.selectedSize[0]) {
-			this.setState({ showTip: true });
-			this.timer = setTimeout(() => this.setState({ showTip: false, tipText: 'Select size' }), 900);
-		} else {
-			this.props.addItemToCart({ id: this.props.data.id, size: this.state.selectedSize[0] });
-			this.setState({ showTip: true, tipText: 'Added' });
-			this.timer = setTimeout(() => this.setState({ showTip: false }), 500);
-		};
-	}
+  handleSubmit = event => {
+    const { selectedSize } = this.state;
+    const { data, addItem } = this.props;
+    event.preventDefault();
+    if (!selectedSize[0]) {
+      this.setState({ showTip: true });
+      this.timer = setTimeout(
+        () => this.setState({ showTip: false, tipText: 'Select size' }),
+        900
+      );
+    } else {
+      addItem({
+        id: data.id,
+        size: selectedSize[0]
+      });
+      this.setState({ showTip: true, tipText: 'Added' });
+      this.timer = setTimeout(() => this.setState({ showTip: false }), 500);
+    }
+  };
 
-	componentWillUnmount() {
-		console.log('unmount card')
-		clearTimeout(this.timer)
-	}
+  // componentDidMount() {
+  // 	console.log('mount card', this.props.data.id)
+  // }
 
-	render() {
-		return (
-			<CardContainer show={this.state.showTip}>
-				<Tip show={this.state.showTip}>
-					<p>{this.state.tipText}</p>
-				</Tip>
-				<img
-					src={require(`../../../../static/img/item${this.props.data.id}.jpg`)}
-					alt={this.props.data.title}
-					width='250px' />
+  render() {
+    const { showTip, selectedSize, tipText } = this.state;
+    const { data } = this.props;
+    return (
+      <CardContainer show={showTip}>
+        <img src={`../img/item${data.id}.jpg`} alt={data.title} width="250px" />
 
-				<Heading>
-					{`${this.props.data.brand} ${this.props.data.title} - ${this.props.data.style}`}
-				</Heading>
+        <ProductName>
+          {`${data.brand} ${data.title} - ${data.style}`}
+        </ProductName>
 
-				<Selector
-					selected={this.state.selectedSize}
-					data={this.props.data.availableSizes}
-					select={(size) => this.handleChange(size)}
-				/>
+        <Selector
+          selected={selectedSize}
+          data={data.availableSizes}
+          select={size => this.handleChange(size)}
+        />
 
-				<Price>
-					{`${this.props.data.price} €`}
-				</Price>
+        <Price>{`${data.price} €`}</Price>
 
-				<Button
-					width='100%'
-					active={this.state.selectedSize}
-					onClick={this.handleSubmit}>ADD TO CART
-				</Button>
+        <AddToCartButton active={selectedSize} onClick={this.handleSubmit}>
+          ADD TO CART
+        </AddToCartButton>
 
-			</CardContainer >
-		);
-	}
+        <Tip show={showTip}>
+          <p>{tipText}</p>
+        </Tip>
+      </CardContainer>
+    );
+  }
 }
 
-const mapDispatchToProps = (dispatch) => {
-	return {
-		addItemToCart: item => dispatch(addItemToCart(item)),
-	};
-}
+const mapDispatchToProps = dispatch => ({
+  addItem: item => dispatch(addItemToCart(item))
+});
 
-
-const Card = connect(null, mapDispatchToProps)(CardConnected);
+const Card = connect(
+  null,
+  mapDispatchToProps
+)(CardConnected);
 
 export default Card;

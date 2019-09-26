@@ -5,9 +5,9 @@ import filterReducer from './filter/filter';
 import sortReducer from './sort/sort';
 
 const rootReducer = combineReducers({
-	cart: cartReducer,
-	filter: filterReducer,
-	sort: sortReducer,
-})
+  cart: cartReducer,
+  filter: filterReducer,
+  sort: sortReducer
+});
 
 export default rootReducer;

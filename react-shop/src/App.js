@@ -17,8 +17,8 @@ class App extends Component {
         <Products />
         <Cart />
         <Modal />
-      </AppContainer >
-    )
+      </AppContainer>
+    );
   }
 }
 

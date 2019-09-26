@@ -1,102 +1,97 @@
 import React, { Component } from 'react';
 
+import styled from 'styled-components';
+import { connect } from 'react-redux';
+
 import Brands from './Brands/Brands';
 import Prices from './Prices/Prices';
 import Sizes from './Sizes/Sizes';
 
-import styled from 'styled-components';
-
-import { connect } from "react-redux";
 import {
-	updateBrands,
-	updatePrices,
-	updateSizes,
-} from "../../../store/actions/actions";
+  updateBrands,
+  updatePrices,
+  updateSizes
+} from '../../../store/actions/actions';
 
 const FilterContainer = styled.div`
-		display: flex;
-		flex-flow: column;
-		justify-content: flex-start;
-		align-items: center;
-		height: 100%;
-	`
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+`;
 
 class FilterConnected extends Component {
-	sizes = Object.keys(this.props.sizes);
+  constructor(props) {
+    super(props);
+    const { sizes } = props;
+    this.sizes = Object.keys(sizes);
+  }
 
-	handleBrandChange = (brand) => {
-		const brands = { ...this.props.brands };
-		brands[brand] = !this.props.brands[brand];
-		this.props.updateBrands(brands);
-	}
+  handleBrandChange = brand => {
+    const { brands, updateFIltersBrands } = this.props;
+    const copyBrands = { ...brands };
+    if (brand) {
+      copyBrands[brand] = !brands[brand];
+    } else {
+      Object.keys(copyBrands).forEach(key => {
+        copyBrands[key] = false;
+      });
+    }
+    updateFIltersBrands(copyBrands);
+  };
 
-	clearBrands = () => {
-		const brands = { ...this.props.brands };
-		for (const brand in brands) {
-			brands[brand] = false;
-		}
-		this.props.updateBrands(brands);
-	}
+  handlePriceChange = (e, type) => {
+    const { prices, updateFIltersPrices } = this.props;
+    const copyPrices = [...prices];
+    copyPrices[type] = e.target.value;
+    updateFIltersPrices(copyPrices);
+  };
 
-	handlePriceChange = (e, type) => {
-		const prices = [...this.props.prices];
-		prices[type] = e.target.value;
-		this.props.updatePrices(prices);
-	}
+  handleSizeChange = size => {
+    const { updateFIltersSizes } = this.props;
+    const sizes = {};
+    if (size) {
+      sizes[size] = true;
+    } else {
+      Object.keys(this.sizes).forEach(key => {
+        sizes[key] = true;
+      });
+    }
+    updateFIltersSizes(sizes);
+  };
 
-	handleSizeChange = (size) => {
-		const sizes = {};
-		sizes[size] = this.props.sizes.length === 1 ?
-			!this.props.sizes[size] :
-			true;
-		this.props.updateSizes(sizes);
-	}
+  render() {
+    const { brands, prices, sizes } = this.props;
+    return (
+      <FilterContainer>
+        <Brands brands={brands} change={this.handleBrandChange} />
 
-	selectAllSizes = () => {
-		const sizes = {};
-		for (const size of this.sizes) {
-			sizes[size] = true;
-		}
-		this.props.updateSizes(sizes);
-	}
+        <Prices prices={prices} change={this.handlePriceChange} />
 
-	render() {
-		return (
-			<FilterContainer>
-				<Brands
-					brands={this.props.brands}
-					change={this.handleBrandChange}
-					clear={this.clearBrands} />
-
-				<Prices
-					prices={this.props.prices}
-					change={this.handlePriceChange} />
-
-				<Sizes
-					initial={this.sizes}
-					sizes={this.props.sizes}
-					change={this.handleSizeChange}
-					select={this.selectAllSizes} />
-			</FilterContainer >
-		);
-	}
-
+        <Sizes
+          initial={this.sizes}
+          sizes={sizes}
+          change={this.handleSizeChange}
+        />
+      </FilterContainer>
+    );
+  }
 }
 
-const mapStateToProps = (state) => {
-	return {
-		...state.filter,
-	};
-}
+const mapStateToProps = state => ({
+  ...state.filter
+});
 
-const mapDispatchToProps = (dispatch) => {
-	return {
-		updateBrands: brands => dispatch(updateBrands(brands)),
-		updatePrices: prices => dispatch(updatePrices(prices)),
-		updateSizes: sizes => dispatch(updateSizes(sizes)),
-	};
-}
+const mapDispatchToProps = dispatch => ({
+  updateFIltersBrands: brands => dispatch(updateBrands(brands)),
+  updateFIltersPrices: prices => dispatch(updatePrices(prices)),
+  updateFIltersSizes: sizes => dispatch(updateSizes(sizes))
+});
 
-const Filter = connect(mapStateToProps, mapDispatchToProps)(FilterConnected);
+const Filter = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FilterConnected);
 
 export default Filter;

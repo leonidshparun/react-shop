@@ -2,11 +2,11 @@ import React from 'react';
 
 import Checkbox from '../../../UI/CheckBox/Checkbox';
 
-import Wrapper from '../Filter.styled';
+import FiltersWrapper from '../Filter.styled';
 
-const Brands = ({ brands, change }) => {
+const Search = ({ brands, change }) => {
   return (
-    <Wrapper>
+    <FiltersWrapper>
       <p>Brands:</p>
       <button type="button" onClick={() => change()}>
         X
@@ -15,15 +15,14 @@ const Brands = ({ brands, change }) => {
         <label htmlFor={brand} key={brand}>
           <Checkbox
             id={brand}
-            type="checkbox"
             checked={brands[brand]}
             onChange={() => change(brand)}
           />
           <span style={{ marginLeft: 8, fontSize: 18 }}>{brand}</span>
         </label>
       ))}
-    </Wrapper>
+    </FiltersWrapper>
   );
 };
 
-export default Brands;
+export default Search;

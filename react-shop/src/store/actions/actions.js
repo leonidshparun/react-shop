@@ -1,11 +1,11 @@
 import {
-	UPDATE_BRANDS,
-	UPDATE_PRICES,
-	UPDATE_SIZES,
-	ADD_ITEM,
-	REMOVE_ITEM,
-	UPDATE_SORT_PRICES,
-} from "./action-types";
+  UPDATE_BRANDS,
+  UPDATE_PRICES,
+  UPDATE_SIZES,
+  ADD_ITEM,
+  REMOVE_ITEM,
+  UPDATE_SORT_PRICES
+} from './action-types';
 
 export const updateBrands = brands => ({ type: UPDATE_BRANDS, brands });
 export const updatePrices = prices => ({ type: UPDATE_PRICES, prices });

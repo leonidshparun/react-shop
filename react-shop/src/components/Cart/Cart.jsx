@@ -1,116 +1,54 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
-import { connect } from "react-redux";
-
-import uniqid from 'uniqid';
-
-import styled from 'styled-components';
-
-import data from '../../static/products/products.json';
-
-import icon from '../../static/icons/shopping-cart.png'
-
-import Item from './Item/Item';
-import Checkout from './Checkout/Checkout';
-
+import { connect } from 'react-redux';
 import { removeItemFromCart } from '../../store/actions/actions';
 
-const CartContainer = styled.div`
-	width: 460px;
-	background-color: #607D8B;
-	height: 100%;
-	position: fixed;
-	top: 0;
-	display: flex;
-	flex-flow: column;
-	justify-content: space-between;
-	right: ${props => props.show ? 0 : '-460px'};
-	transition: right 0.2s;
-`;
+import icon from '../../static/icons/shopping-cart.png';
 
-const Items = styled.div`
-		height: calc(100vh - 160px);
-    overflow: auto;
-		::-webkit-scrollbar { 
-    	display: none; 
-		}
-`;
+import Checkout from './Checkout/Checkout';
+import Items from './Items/Items';
 
-const ToggleIcon = styled.button`
-		position: absolute;
-		left: -50px;
-		top: 0;
-		height: 50px;
-		width: 50px;
-		background-color: gold;
-		font-size: 30px;
+import { CartContainer, ToggleIcon } from './Cart.styled';
 
-		p {
-			background-color: #FF5722;
-			font-size: 16px;
-			color: white;
-			position: absolute;
-			bottom: -2px;
-			left: -2px;
-			width: 18px;
-			height: 18px;
-		}
-`;
+const CartConnected = ({ items, removeItem }) => {
+  const [isVisible, toggleVisibility] = useState(false);
 
-class CartConnected extends Component {
-	state = {
-		visible: false,
-	}
+  const total = { price: 0 };
 
-	toggleCart = () => {
-		this.setState({ visible: !this.state.visible })
-	}
+  const remove = idx => {
+    const updatedItems = [...items.slice(0, idx), ...items.slice(idx + 1)];
+    removeItem(updatedItems);
+  };
 
-	removeItem = (idx) => {
-		const items = [...this.props.items];
-		const updatedItems = [...items.slice(0, idx), ...items.slice(idx + 1)];
-		this.props.removeItemFromCart(updatedItems);
-	}
+  const changeTotal = price => {
+    total.price += price;
+  };
 
-	render() {
-		const items = this.props.items;
-		let total = 0;
-		return (
-			<CartContainer show={this.state.visible}>
-				<ToggleIcon onClick={this.toggleCart}>
-					<img src={icon} width={30} alt='toggle cart' />
-					{items.length !== 0 ? <p>{items.length}</p> : null}
-				</ToggleIcon>
-				<Items>
-					{items.map((item, idx) => {
-						const product = data.products[item.id - 1];
-						total += product.price;
-						return <Item
-							remove={() => this.removeItem(idx)}
-							key={uniqid()}
-							product={product}
-							item={item} />
-					})}
-				</Items>
-				<Checkout total={total} />
-			</CartContainer >
-		);
-	}
+  return (
+    <CartContainer show={isVisible}>
+      <ToggleIcon onClick={() => toggleVisibility(!isVisible)}>
+        <img src={icon} width={30} alt="toggle cart" />
+        <p>{items.length}</p>
+      </ToggleIcon>
 
-}
+      <Items items={items} remove={remove} changeTotal={changeTotal} />
 
-const mapStateToProps = (state) => {
-	return {
-		items: [...state.cart],
-	};
-}
+      <Checkout total={total} />
+    </CartContainer>
+  );
+};
 
-const mapDispatchToProps = (dispatch) => {
-	return {
-		removeItemFromCart: items => dispatch(removeItemFromCart(items)),
-	};
-}
+const mapStateToProps = state => ({
+  items: state.cart
+});
 
-const Cart = connect(mapStateToProps, mapDispatchToProps)(CartConnected);
+const mapDispatchToProps = dispatch => ({
+  removeItem: items => dispatch(removeItemFromCart(items))
+});
+
+const Cart = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CartConnected);
 
 export default Cart;

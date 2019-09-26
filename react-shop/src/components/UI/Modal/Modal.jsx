@@ -18,8 +18,8 @@ const ModalContainer = styled.div`
 
 const ModalContent = styled.div`
   background-color: #009688f0;
-	height: 150px;
-	width: 250px;
+  height: 150px;
+  width: 250px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,51 +27,46 @@ const ModalContent = styled.div`
 `;
 
 class Modal extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			showModal: false,
-			content: 'MODAL CONTENT',
-		};
-		this.el = document.createElement('div');
-	}
+  constructor(props) {
+    super(props);
+    this.state = {
+      showModal: false,
+      content: 'MODAL CONTENT'
+    };
+    this.el = document.createElement('div');
+  }
 
+  handleShow = () => {
+    this.setState({ showModal: true });
+  };
 
-	handleShow = () => {
-		this.setState({ showModal: true });
-	}
+  handleHide = () => {
+    this.setState({ showModal: false });
+  };
 
-	handleHide = () => {
-		this.setState({ showModal: false });
-	}
+  setTimer = time => {
+    if (time) setTimeout(() => this.setState({ showModal: false }), time);
+  };
 
-	setTimer = (time) => {
-		if (time) setTimeout(() => this.setState({ showModal: false }), time)
-	}
+  componentDidMount() {
+    modalRoot.appendChild(this.el);
+    // this.setTimer(1000);
+  }
 
+  componentWillUnmount() {
+    modalRoot.removeChild(this.el);
+  }
 
-	componentDidMount() {
-		modalRoot.appendChild(this.el);
-		// this.setTimer(1000);
-	}
-
-	componentWillUnmount() {
-		modalRoot.removeChild(this.el);
-	}
-
-	render() {
-		const modal = this.state.showModal ?
-			<ModalContainer onClick={this.handleHide}>
-				<ModalContent>
-					{this.state.content}
-				</ModalContent>
-			</ModalContainer> :
-			'';
-		return ReactDOM.createPortal(
-			modal,
-			this.el,
-		);
-	}
+  render() {
+    const modal = this.state.showModal ? (
+      <ModalContainer onClick={this.handleHide}>
+        <ModalContent>{this.state.content}</ModalContent>
+      </ModalContainer>
+    ) : (
+      ''
+    );
+    return ReactDOM.createPortal(modal, this.el);
+  }
 }
 
 export default Modal;
