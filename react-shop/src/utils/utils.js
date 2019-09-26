@@ -1,11 +1,11 @@
 export const chunk = (array, size) => {
-  const chunked_arr = [];
+  const chunkedArr = [];
   let index = 0;
   while (index < array.length) {
-    chunked_arr.push(array.slice(index, size + index));
+    chunkedArr.push(array.slice(index, size + index));
     index += size;
   }
-  return chunked_arr;
+  return chunkedArr;
 };
 
 export const updateObject = (oldObject, updatedProperties) => {

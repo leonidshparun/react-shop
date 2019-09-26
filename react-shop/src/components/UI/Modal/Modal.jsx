@@ -36,6 +36,15 @@ class Modal extends React.Component {
     this.el = document.createElement('div');
   }
 
+  componentDidMount() {
+    modalRoot.appendChild(this.el);
+    // this.setTimer(1000);
+  }
+
+  componentWillUnmount() {
+    modalRoot.removeChild(this.el);
+  }
+
   handleShow = () => {
     this.setState({ showModal: true });
   };
@@ -48,19 +57,11 @@ class Modal extends React.Component {
     if (time) setTimeout(() => this.setState({ showModal: false }), time);
   };
 
-  componentDidMount() {
-    modalRoot.appendChild(this.el);
-    // this.setTimer(1000);
-  }
-
-  componentWillUnmount() {
-    modalRoot.removeChild(this.el);
-  }
-
   render() {
-    const modal = this.state.showModal ? (
+    const { showModal, content } = this.state;
+    const modal = showModal ? (
       <ModalContainer onClick={this.handleHide}>
-        <ModalContent>{this.state.content}</ModalContent>
+        <ModalContent>{content}</ModalContent>
       </ModalContainer>
     ) : (
       ''

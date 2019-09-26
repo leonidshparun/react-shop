@@ -10,7 +10,9 @@ import { updateObject } from '../../../utils/utils';
 
 const brandsAll = [...new Set(data.products.map(product => product.brand))];
 const brands = {};
-brandsAll.forEach(brand => (brands[brand] = true));
+brandsAll.forEach(brand => {
+  brands[brand] = true;
+});
 
 const pricesRange = [...new Set(data.products.map(product => product.price))];
 const prices = [Math.min(...pricesRange), Math.max(...pricesRange)];
@@ -21,7 +23,9 @@ const sizesAll = [
   )
 ];
 const sizes = {};
-sizesAll.forEach(size => (sizes[size] = true));
+sizesAll.forEach(size => {
+  sizes[size] = true;
+});
 
 const initialState = {
   brands,

@@ -45,13 +45,7 @@
     "react-hooks/exhaustive-deps": "warn",
     "no-console": "off",
     "react/prop-types": 0,
-    "prettier/prettier": ["error"],
-    "react/jsx-props-no-spreading": [
-      {
-        "html": "ignore",
-        "custom": "ignore"
-      }
-    ]
+    "prettier/prettier": ["error"]
   },
   "globals": {
     "window": true,

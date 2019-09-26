@@ -20,26 +20,28 @@ const Element = styled.span`
   background: ${props => (props.status ? '#00BCD450' : '#9e9e9e50')};
   cursor: pointer;
   user-select: none;
-
   :hover {
     background-color: #00bcd450;
   }
 `;
 
-const Selector = props => (
-  <Container>
-    {props.data
-      .sort((a, b) => a - b)
-      .map(size => (
-        <Element
-          onClick={() => props.select(size)}
-          key={size}
-          status={props.selected.includes(size)}
-        >
-          {size}
-        </Element>
-      ))}
-  </Container>
-);
+const Selector = props => {
+  const { data, select, selected } = props;
+  return (
+    <Container>
+      {data
+        .sort((a, b) => a - b)
+        .map(size => (
+          <Element
+            onClick={() => select(size)}
+            key={size}
+            status={selected.includes(size)}
+          >
+            {size}
+          </Element>
+        ))}
+    </Container>
+  );
+};
 
 export default Selector;
