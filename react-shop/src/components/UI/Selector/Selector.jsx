@@ -6,9 +6,9 @@ const Container = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-content: space-around;
-  min-height: 60px;
   width: 100%;
   overflow: auto;
+
   ::-webkit-scrollbar {
     display: none;
   }
@@ -16,8 +16,10 @@ const Container = styled.div`
 
 const Element = styled.span`
   margin: 3px;
-  padding: 4px;
-  background: ${props => (props.status ? '#00BCD450' : '#9e9e9e50')};
+  padding: 3px;
+  font-size: 15px;
+  border: ${props =>
+    props.status ? '1px solid black' : '1px solid #9e9e9e85'};
   cursor: pointer;
   user-select: none;
   :hover {
@@ -26,9 +28,9 @@ const Element = styled.span`
 `;
 
 const Selector = props => {
-  const { data, select, selected } = props;
+  const { data, select, selected, show } = props;
   return (
-    <Container>
+    <Container show={show}>
       {data
         .sort((a, b) => a - b)
         .map(size => (

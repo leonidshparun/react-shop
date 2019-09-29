@@ -7,8 +7,6 @@ import Card from '../Card/Card';
 
 const Container = styled.div`
   display: flex;
-  width: 1125px;
-  height: 840px;
   flex-wrap: wrap;
   place-content: start;
 `;
