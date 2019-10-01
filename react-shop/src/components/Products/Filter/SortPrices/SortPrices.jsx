@@ -1,12 +1,23 @@
 import React, { Component } from 'react';
 
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 
-import { updateSortPrices } from '../../../../store/actions/actions';
+import { updateSortPrices } from 'store/actions/actions';
 
-import img from '../../../../static/icons/up-arrow.png';
+import img from 'static/icons/order.png';
 
-import Wrapper from '../Filter.styled';
+const Container = styled.div`
+  grid-area: st;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #eee;
+  border-radius: 15px;
+  padding: 3px;
+  padding-left: 10px;
+  width: -webkit-fill-available;
+`;
 
 class SortPricesConnected extends Component {
   constructor(props) {
@@ -31,22 +42,32 @@ class SortPricesConnected extends Component {
 
   render() {
     const { sortPrices } = this.state;
-    const angle = sortPrices === 'max' ? 180 : 0;
+    const angle = sortPrices === 'max' ? 0 : 180;
     const icon = (
       <img
-        style={{ transform: `rotate(${angle}deg)` }}
+        style={{
+          transform: `rotate(${angle}deg)`,
+          transition: 'transform 0.5s'
+        }}
         src={img}
         width={16}
         alt="sort prices"
       />
     );
     return (
-      <Wrapper>
-        <p>Sort by price:</p>
-        <button type="button" onClick={this.handleChange}>
+      <Container>
+        <span>Sort by price</span>
+        <button
+          style={{
+            width: 25,
+            height: 25
+          }}
+          type="button"
+          onClick={this.handleChange}
+        >
           {icon}
         </button>
-      </Wrapper>
+      </Container>
     );
   }
 }

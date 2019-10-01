@@ -5,25 +5,25 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import uniqid from 'uniqid';
 
-import Wrapper from '../Filter.styled';
-
-import { updateBrands } from '../../../../store/actions/actions';
+import { updateBrands } from 'store/actions/actions';
 
 const Select = styled.select`
-  border-radius: 15px;
   font-size: 14px;
-  border: 1px solid rgb(169, 169, 169);
-  padding: 3px;
-  padding-left: 10px;
-  height: 24px;
+  padding: 5px;
+  border: 1px solid #eee;
+  height: 33px;
+  width: -webkit-fill-available;
+  border-radius: 15px;
+`;
+
+const Container = styled.div`
+  grid-area: mn;
 `;
 
 const FilterBrandsConnected = ({ initial, updateFilter }) => {
   const [selected, changeSelection] = useState('def');
 
   const handleBrandChange = e => {
-    console.log(e.target.value);
-
     const { value } = e.target;
     const update = value === 'all' ? initial : { [value]: true };
     changeSelection(value);
@@ -31,8 +31,8 @@ const FilterBrandsConnected = ({ initial, updateFilter }) => {
   };
 
   return (
-    <Wrapper>
-      <p>Brands:</p>
+    <Container>
+      {/* <p>Brands:</p> */}
       <Select
         name="selectBrand"
         id="brands"
@@ -41,7 +41,7 @@ const FilterBrandsConnected = ({ initial, updateFilter }) => {
         value={selected}
       >
         <option value="all" defaultValue>
-          All
+          Manufacturer
         </option>
         {Object.keys(initial).map(brand => (
           <option key={uniqid()} id={brand} value={brand}>
@@ -49,7 +49,7 @@ const FilterBrandsConnected = ({ initial, updateFilter }) => {
           </option>
         ))}
       </Select>
-    </Wrapper>
+    </Container>
   );
 };
 

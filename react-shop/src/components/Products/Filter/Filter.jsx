@@ -8,35 +8,37 @@ import FilterSearch from './FilterSearch/FilterSearch';
 import FilterSizes from './FilterSizes/FilterSizes';
 import SortPrices from './SortPrices/SortPrices';
 
-import Content from '../Content/Content';
-
-const FilterContainer = styled.div`
-  display: flex;
-  flex-flow: column;
-  justify-content: flex-start;
-  align-items: center;
-  height: 100%;
+const Filters = styled.div`
+  margin-top: 20px;
+  position: relative;
+  display: grid;
+  grid-template-columns: 100px 160px 220px 30px 150px;
+  grid-gap: 10px;
+  grid-template-areas:
+    'sc sc aa qq st'
+    'ti mn pr sz sz';
 `;
 
-const Filters = styled.div`
+const Title = styled.p`
+  grid-area: ti;
+  font-size: 18px;
+  font-weight: 800;
+
   display: flex;
-  flex-flow: row;
-  position: relative;
-  height: 90px;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Filter = () => {
   return (
-    <FilterContainer>
-      <Filters>
-        <FilterSearch />
-        <FilterBrands />
-        <FilterPrices />
-        <FilterSizes />
-        <SortPrices />
-      </Filters>
-      <Content />
-    </FilterContainer>
+    <Filters>
+      <FilterSearch />
+      <FilterBrands />
+      <Title>FILTERS:</Title>
+      <FilterPrices />
+      <FilterSizes />
+      <SortPrices />
+    </Filters>
   );
 };
 

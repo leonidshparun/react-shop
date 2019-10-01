@@ -3,25 +3,33 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 
-import { debounce } from '../../../../utils/utils';
-import { updateSearch } from '../../../../store/actions/actions';
+import { debounce } from 'utils/utils';
+import { updateSearch } from 'store/actions/actions';
 
-import Wrapper from '../Filter.styled';
+const Container = styled.div`
+  grid-area: sc;
+`;
 
 const SearchBar = styled.input`
-  border-radius: 15px;
+  display: flex;
   font-size: 14px;
-  border: 1px solid rgb(169, 169, 169);
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #eee;
   padding: 3px;
+  width: -webkit-fill-available;
+  height: 33px;
+  border-radius: 15px;
   padding-left: 10px;
-  height: 24px;
 `;
 
 const FilterSearchConnected = ({ updateFilter }) => (
-  <Wrapper>
-    <p>Search: </p>
-    <SearchBar onInput={e => updateFilter(e.target.value)} />
-  </Wrapper>
+  <Container>
+    <SearchBar
+      onInput={e => updateFilter(e.target.value)}
+      placeholder="Search..."
+    />
+  </Container>
 );
 
 const mapStateToProps = state => ({
