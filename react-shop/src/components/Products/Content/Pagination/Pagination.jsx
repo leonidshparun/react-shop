@@ -35,7 +35,7 @@ const Pagination = ({ pages, click, active }) => {
     );
   }
 
-  return (
+  return pages > 1 ? (
     <Container>
       <NavButton disabled={active === 0} onClick={() => click(active - 1)}>
         {'<'}
@@ -50,7 +50,7 @@ const Pagination = ({ pages, click, active }) => {
         {'>'}
       </NavButton>
     </Container>
-  );
+  ) : null;
 };
 
 export default Pagination;
