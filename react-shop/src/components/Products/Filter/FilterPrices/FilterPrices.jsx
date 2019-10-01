@@ -1,76 +1,72 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import Wrapper from '../Filter.styled';
+import Range from 'components/UI/Range/Range';
 
-import { updatePrices } from '../../../../store/actions/actions';
+import { debounce } from 'utils/utils';
+import { updatePrices } from 'store/actions/actions';
 
-const Container = styled(Wrapper)`
-  input {
-    width: 60px;
-    border-radius: 15px;
-    font-size: 14px;
-    border: 1px solid rgb(169, 169, 169);
-    padding: 3px;
-    padding-left: 10px;
-    height: 24px;
-  }
-
-  label {
-    width: 60px;
-    font-size: 14px;
-    margin: 3px;
-  }
-
-  div {
-    display: flex;
-    justify-content: center;
-  }
+const Container = styled.div`
+  grid-area: pr;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  align-items: center;
+  width: -webkit-fill-available;
 `;
 
-const FilterPricesConnected = ({ prices, updateFilter }) => {
-  const handlePriceChange = (e, type) => {
-    const copyPrices = [...prices];
-    copyPrices[type] = +e.target.value;
-    updateFilter(copyPrices);
+class FilterPricesConnected extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      min: props.prices[0],
+      max: props.prices[1]
+    };
+  }
+
+  handleChangeMax = e => {
+    const { value } = e.target;
+    const { min } = this.state;
+    const { updateFilter } = this.props;
+    const Amax = Math.max(value, min);
+    this.setState({ min, max: Amax });
+    updateFilter([min, Amax]);
   };
 
-  return (
-    <Container>
-      <p>Price, €:</p>
-      <div>
-        <label htmlFor="from">
-          from:{' '}
-          <input
-            id="from"
-            type="text"
-            value={prices[0]}
-            onChange={e => handlePriceChange(e, 0)}
-          />
-        </label>
+  handleChangeMin = e => {
+    const { value } = e.target;
+    const { max } = this.state;
+    const { updateFilter } = this.props;
+    const Amin = Math.min(value, max);
+    this.setState({ min: Amin, max });
+    updateFilter([Amin, max]);
+  };
 
-        <label htmlFor="to">
-          to:{' '}
-          <input
-            id="to"
-            type="text"
-            value={prices[1]}
-            onChange={e => handlePriceChange(e, 1)}
-          />
-        </label>
-      </div>
-    </Container>
-  );
-};
+  render() {
+    const { min, max } = this.state;
+    const { init } = this.props;
+    return (
+      <Container>
+        <span style={{ fontSize: 14 }}>{`${min} € - ${max} €`}</span>
+        <Range
+          update={{ max: this.handleChangeMax, min: this.handleChangeMin }}
+          values={{ min, max }}
+          init={init}
+        />
+      </Container>
+    );
+  }
+}
 
 const mapStateToProps = state => ({
-  prices: state.filter.prices
+  prices: state.filter.prices,
+  init: state.filter.initialPrices
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateFilter: prices => dispatch(updatePrices(prices))
+  updateFilter: debounce(prices => dispatch(updatePrices(prices)), 500)
 });
 
 const FilterPrices = connect(
