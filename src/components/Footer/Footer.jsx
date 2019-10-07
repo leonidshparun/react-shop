@@ -1,20 +1,14 @@
 import React from 'react';
 
-import styled from 'styled-components';
+import { Wrapper } from './style';
 
-const Wrapper = styled.footer`
-  background: khaki;
-`;
-
-const Footer = () => {
-  return (
-    <Wrapper>
-      <p>CONTACT FORM</p>
-      <p>OUR OFFER</p>
-      <p>INFORMATION</p>
-      <p>COPYRIGHTS</p>
-    </Wrapper>
-  );
-};
+const Footer = () => (
+  <Wrapper>
+    <p>CONTACT FORM</p>
+    <p>OUR OFFER</p>
+    <p>INFORMATION</p>
+    <p>COPYRIGHTS</p>
+  </Wrapper>
+);
 
 export default Footer;

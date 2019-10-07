@@ -2,26 +2,10 @@ import React, { useState } from 'react';
 
 import { connect } from 'react-redux';
 
-import styled from 'styled-components';
-
 import { updateDiscounts } from 'store/actions/actions';
 
 import icon from 'static/icons/discount.png';
-
-const Container = styled.div`
-  grid-area: dc;
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #eee;
-  padding: 3px;
-  border-radius: 15px;
-
-  img {
-    filter: ${props => (!props.isActive ? 'grayscale(1)' : 'none')};
-  }
-`;
+import Container from './style';
 
 const FilterDiscountsConnected = ({ updateFilter }) => {
   const [isActive, toggleSate] = useState(false);

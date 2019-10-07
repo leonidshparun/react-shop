@@ -2,23 +2,12 @@ import React, { useState } from 'react';
 
 import { connect } from 'react-redux';
 
-import styled from 'styled-components';
-
 import Range from 'components/UI/Range/Range';
 
 import { debounce } from 'utils/utils';
 import { updatePrices } from 'store/actions/actions';
 
-const Container = styled.div`
-  grid-area: pr;
-  display: flex;
-  flex-flow: column;
-  justify-content: space-between;
-  align-items: center;
-  border: 1px solid #eee;
-  padding: 3px;
-  border-radius: 15px;
-`;
+import Container from './style';
 
 const FilterPricesConnected = ({ initial, updateFilter, prices }) => {
   const [rangeValues, updateRangeValues] = useState([...prices]);

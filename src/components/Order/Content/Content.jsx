@@ -26,27 +26,24 @@ const Container = styled.tbody`
   }
 `;
 
-const Heading = ({ items, total, remove }) => {
-  items.push(...data.products.slice(1, 6));
-  return (
-    <Container>
-      {items.map((item, idx) => {
-        const product = data.products[item.id - 1];
-        total(product.price);
-        const { id, title, brand, style, price } = product;
-        return (
-          <tr key={uniqid()}>
-            <Image id={id} title={title} />
-            <Description brand={brand} title={title} style={style} size={40} />
-            <UnitPrice price={price} />
-            <Quantity qnt={1} />
-            <Remove remove={remove} idx={idx} />
-            <TotalPrice price={price} qnt={1} />
-          </tr>
-        );
-      })}
-    </Container>
-  );
-};
+const Heading = ({ items, total, remove }) => (
+  <Container>
+    {items.map((item, idx) => {
+      const product = data.products[item.id - 1];
+      total(product.price);
+      const { id, title, brand, style, price } = product;
+      return (
+        <tr key={uniqid()}>
+          <Image id={id} title={title} />
+          <Description brand={brand} title={title} style={style} size={40} />
+          <UnitPrice price={price} />
+          <Quantity qnt={1} />
+          <Remove remove={remove} idx={idx} />
+          <TotalPrice price={price} qnt={1} />
+        </tr>
+      );
+    })}
+  </Container>
+);
 
 export default Heading;

@@ -1,27 +1,13 @@
 import React, { useState } from 'react';
 
 import { connect } from 'react-redux';
-
-import styled from 'styled-components';
 import uniqid from 'uniqid';
 
 import { updateBrands } from 'store/actions/actions';
-
-const Container = styled.div`
-  grid-area: mn;
-`;
-
-const Select = styled.select`
-  font-size: 14px;
-  padding: 5px;
-  border: 1px solid #eee;
-  height: 33px;
-  width: 100%;
-  border-radius: 15px;
-`;
+import { Container, Select } from './style';
 
 const FilterBrandsConnected = ({ initial, updateFilter }) => {
-  const [selected, changeSelection] = useState('def');
+  const [selected, changeSelection] = useState('default');
 
   const handleBrandChange = value => {
     const update = value === 'all' ? initial : { [value]: true };

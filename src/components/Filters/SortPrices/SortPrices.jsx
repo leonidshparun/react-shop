@@ -1,32 +1,12 @@
 import React, { useState } from 'react';
 
-import styled from 'styled-components';
 import { connect } from 'react-redux';
 
 import { updateSortPrices } from 'store/actions/actions';
 
 import img from 'static/icons/order.png';
 
-const Container = styled.div`
-  grid-area: st;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border: 1px solid #eee;
-  border-radius: 15px;
-  padding: 3px 10px;
-  cursor: pointer;
-`;
-
-const Icon = styled.img`
-  transform: ${props => (props.active ? `rotate(180deg)` : null)};
-  transition: transform 0.5s;
-`;
-
-const SortButton = styled.button`
-  width: 25px;
-  height: 25px;
-`;
+import { Container, Icon, SortButton } from './style';
 
 const SortPricesConnected = ({ updateSort }) => {
   const [sortType, changeType] = useState();

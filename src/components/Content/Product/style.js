@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import devices from 'utils/responsive';
+import devices from 'style/responsive';
 
 import Box from 'components/UI/Box/Box';
 

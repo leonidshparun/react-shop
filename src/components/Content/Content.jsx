@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import styled from 'styled-components';
 import { connect } from 'react-redux';
 
 import Spinner from 'components/UI/Spinner/Spinner';
@@ -11,15 +10,7 @@ import Pagination from './Pagination/Pagination';
 
 import Alert from './Alert/Alert';
 
-const Wrapper = styled.div`
-  display: flex;
-  min-height: 450px;
-  min-width: 300px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 30px;
-`;
+import { Wrapper } from './style';
 
 class ContentConnected extends Component {
   constructor(props) {
@@ -34,7 +25,7 @@ class ContentConnected extends Component {
   }
 
   componentDidMount() {
-    this.fetchData(2000);
+    this.fetchData(500);
   }
 
   componentDidUpdate(prevProps, prevState) {

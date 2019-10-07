@@ -6,7 +6,7 @@ import { removeItemFromCart } from 'store/actions/actions';
 import Heading from './Heading/Heading';
 import Content from './Content/Content';
 
-import { CartContainer } from './Order.styled';
+import { CartContainer } from './style';
 
 const CartConnected = ({ items, removeItem }) => {
   const total = { price: 0 };
@@ -29,9 +29,6 @@ const CartConnected = ({ items, removeItem }) => {
 
         <Content items={items} remove={remove} total={changeTotal} />
       </table>
-      {/* <Items items={items} remove={remove} changeTotal={changeTotal} />
-
-      <Checkout total={total} /> */}
     </CartContainer>
   );
 };
