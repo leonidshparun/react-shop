@@ -6,26 +6,25 @@ import uniqid from 'uniqid';
 import { NavLink } from 'react-router-dom';
 
 const NavContainer = styled.nav`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-
   ul {
-    display: flex;
-    flex-flow: row;
-    max-width: 700px;
-    width: 100%;
-    justify-content: space-around;
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    max-width: 80vw;
+    overflow: auto;
+    white-space: nowrap;
   }
 `;
 
 const NavItem = styled.li`
+  display: inline-block;
+  color: white;
+  text-align: center;
+  text-decoration: none;
   a {
     text-decoration: none;
     display: flex;
-    padding: 15px 5px 15px;
+    padding: 15px 10px;
     font-family: 'Montserrat', Roboto, sans-serif;
     font-weight: 500;
     font-size: 14px;
@@ -46,9 +45,12 @@ const activeLink = {
 };
 
 const links = [
-  { title: 'Home', path: '/' },
-  { title: 'Order', path: '/order' },
-  { title: 'Other', path: '/other' }
+  { title: 'NEW', path: '/' },
+  { title: 'MEN SNEAKERS', path: '/' },
+  { title: 'WOMEN SNEAKERS', path: '/other' },
+  { title: 'CLOTHING', path: '/other' },
+  { title: 'LIFESTYLE', path: '/other' },
+  { title: 'SALE', path: '/order' }
 ];
 
 const Navigation = () => {

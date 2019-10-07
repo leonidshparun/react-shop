@@ -3,56 +3,51 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 
-import Navigation from 'components/Navigation/Navigation';
+import Header from 'components/Header/Header';
+import Footer from 'components/Footer/Footer';
 
 import Content from 'components/Content/Content';
 import Filters from 'components/Filters/Filters';
 import Order from 'components/Order/Order';
 import Modal from 'components/UI/Modal/Modal';
 
-const AppContainer = styled.main`
+const AppContainer = styled.div`
   position: relative;
 `;
 
 const MainView = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   min-width: 320px;
+  padding-top: 110px;
+  padding-bottom: 40px;
+  min-height: calc(100vh - 70px);
 `;
 
-const Shopping = () => (
-  <MainView>
-    <Filters />
-    <Content />
-  </MainView>
-);
-
-const Cart = () => (
-  <MainView>
-    <Order />
-  </MainView>
-);
-
 const App = () => (
-  <AppContainer>
-    <BrowserRouter>
-      <div>
-        <Navigation />
+  <BrowserRouter>
+    <AppContainer>
+      <Header />
+
+      <MainView>
         <Switch>
           <Route exact path="/">
-            <Shopping />
+            <Filters />
+            <Content />
           </Route>
           <Route path="/order">
-            <Cart />
+            <Order />
           </Route>
           <Route path="/other">
             <Modal />
           </Route>
         </Switch>
-      </div>
-    </BrowserRouter>
-  </AppContainer>
+      </MainView>
+
+      <Footer />
+    </AppContainer>
+  </BrowserRouter>
 );
 export default App;
