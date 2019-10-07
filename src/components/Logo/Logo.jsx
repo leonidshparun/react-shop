@@ -2,9 +2,9 @@ import React from 'react';
 
 import logo from 'static/logo.png';
 
-const Logo = ({ width }) => (
+const Logo = () => (
   <a href="/">
-    <img src={logo} alt="compony name" width={width} />
+    <img src={logo} alt="compony name" width="100%" />
   </a>
 );
 

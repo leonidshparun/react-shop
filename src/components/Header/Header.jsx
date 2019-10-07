@@ -54,7 +54,7 @@ class Header extends Component {
         </TipWrapper>
 
         <LogoWrapper isFull={isFull}>
-          <Logo width={isFull ? 260 : 140} />
+          <Logo />
         </LogoWrapper>
 
         <CartBtnWrapper>

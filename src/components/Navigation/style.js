@@ -8,6 +8,7 @@ export const NavContainer = styled.nav`
       display: none;
     }
     max-width: 80vw;
+    min-width: 320px;
     overflow: auto;
     white-space: nowrap;
   }
