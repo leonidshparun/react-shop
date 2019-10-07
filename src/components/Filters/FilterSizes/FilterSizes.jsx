@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { connect } from 'react-redux';
-import Selector from 'components/UI/Selector/Selector';
+import Selector from 'shared/UI/Selector/Selector';
 
 import { updateSizes } from 'store/actions/actions';
 

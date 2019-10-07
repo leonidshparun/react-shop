@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
-import Spinner from 'components/UI/Spinner/Spinner';
+import Spinner from 'shared/UI/Spinner/Spinner';
 import data from 'static/products/products.json';
 
 import ProductList from './ProductList/ProductList';

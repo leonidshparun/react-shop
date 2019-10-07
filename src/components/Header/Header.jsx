@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Navigation from 'components/Navigation/Navigation';
-import Logo from 'components/Logo/Logo';
+import Logo from 'shared/Logo/Logo';
 
 import Tip from './Tip/Tip';
 import CartButton from './CartButton/CartButton';

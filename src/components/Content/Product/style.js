@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import devices from 'style/responsive';
 
-import Box from 'components/UI/Box/Box';
+import Box from 'shared/UI/Box/Box';
 
 export const ProductContainer = styled(Box)`
   height: 300px;

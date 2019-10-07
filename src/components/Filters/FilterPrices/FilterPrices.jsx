@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { connect } from 'react-redux';
 
-import Range from 'components/UI/Range/Range';
+import Range from 'shared/UI/Range/Range';
 
 import { debounce } from 'utils/utils';
 import { updatePrices } from 'store/actions/actions';
