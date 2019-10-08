@@ -58,6 +58,7 @@ export const LogoWrapper = styled.div`
 
 export const CartBtnWrapper = styled.div`
   grid-area: cart;
+  padding-right: 15px;
 `;
 
 export const NavWrapper = styled.div`
