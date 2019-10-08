@@ -7,9 +7,11 @@ import Header from 'components/Header/Header';
 import Footer from 'components/Footer/Footer';
 
 import Content from 'components/Content/Content';
-import Filters from 'components/Filters/Filters';
+import Filters from 'components/Content/Filters/Filters';
 import Order from 'components/Order/Order';
 import Modal from 'shared/UI/Modal/Modal';
+
+import ProductPage from 'components/ProductPage/ProductPage';
 
 const AppContainer = styled.div`
   position: relative;
@@ -37,12 +39,11 @@ const App = () => (
             <Filters />
             <Content />
           </Route>
-          <Route path="/order">
-            <Order />
-          </Route>
+          <Route path="/order" component={Order} />
           <Route path="/other">
             <Modal />
           </Route>
+          <Route path="/product/:id" component={ProductPage} />
         </Switch>
       </MainView>
 
