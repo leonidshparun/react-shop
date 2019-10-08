@@ -15,20 +15,18 @@ const links = [
   { title: 'SALE', path: '/sale' }
 ];
 
-const Navigation = () => {
-  return (
-    <NavContainer>
-      <ul>
-        {links.map(link => (
-          <NavItem key={uniqid()}>
-            <NavLink activeStyle={activeLink} exact to={link.path}>
-              {link.title.toUpperCase()}
-            </NavLink>
-          </NavItem>
-        ))}
-      </ul>
-    </NavContainer>
-  );
-};
+const Navigation = () => (
+  <NavContainer>
+    <ul>
+      {links.map(link => (
+        <NavItem key={uniqid()}>
+          <NavLink activeStyle={activeLink} exact to={link.path}>
+            {link.title.toUpperCase()}
+          </NavLink>
+        </NavItem>
+      ))}
+    </ul>
+  </NavContainer>
+);
 
 export default Navigation;
