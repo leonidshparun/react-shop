@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
+import { withRouter } from 'react-router-dom';
 import Spinner from 'shared/UI/Spinner/Spinner';
 
 import Alert from 'shared/Alert/Alert';
@@ -16,7 +17,7 @@ class ContentConnected extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      itemsPerPage: 8,
+      itemsPerPage: 500,
       currentPage: 0,
       content: null,
       loading: true
@@ -41,7 +42,8 @@ class ContentConnected extends Component {
 
   fetchData = () => {
     const { filter } = this.props;
-    Server.getFiltredContent(filter).then(this.onLoad);
+    const { match } = this.props;
+    Server.getFiltredContent(filter, match).then(this.onLoad);
   };
 
   onLoad = content => {
@@ -101,6 +103,6 @@ const mapStateToProps = state => ({
   filter: state.filter
 });
 
-const Content = connect(mapStateToProps)(ContentConnected);
+const Content = withRouter(connect(mapStateToProps)(ContentConnected));
 
 export default Content;

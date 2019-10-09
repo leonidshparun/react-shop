@@ -18,11 +18,11 @@ const Product = withRouter(({ data, history }) => {
   return (
     <ProductContainer
       onClick={() => {
-        history.push(`product/${link}`);
+        history.push(`/product/${link}`);
       }}
       borders={{ bottom: true }}
     >
-      <Image src={`../img/item${id}.jpg`} alt={title} />
+      <Image src={`../../../img/item${id}.jpg`} alt={title} />
       <Details
         price={price}
         discount={discount}

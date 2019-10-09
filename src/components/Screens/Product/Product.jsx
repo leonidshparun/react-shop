@@ -32,24 +32,16 @@ const ProductPageConnected = ({ match, addItem }) => {
 
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
 
   const [selectedSize, selectSize] = useState([0]);
 
   useEffect(() => {
     const fetchData = async () => {
-      setIsError(false);
       setIsLoading(true);
-      try {
-        const result = await Server.getProduct(productId - 1);
-        console.log(result);
-        setData(result);
-        const { availableSizes } = result;
-        selectSize([availableSizes[0]]);
-      } catch (error) {
-        setIsError(true);
-        console.log(error);
-      }
+      const result = await Server.getProduct(productId - 1);
+      setData(result);
+      const { availableSizes } = result;
+      selectSize([availableSizes[0]]);
       setIsLoading(false);
     };
     fetchData();
@@ -98,12 +90,7 @@ const ProductPageConnected = ({ match, addItem }) => {
     );
   };
 
-  return (
-    <>
-      {isError && <div>Something went wrong ...</div>}
-      {isLoading ? <Spinner /> : productLoaded()}
-    </>
-  );
+  return isLoading ? <Spinner /> : productLoaded();
 };
 
 const mapDispatchToProps = dispatch => ({

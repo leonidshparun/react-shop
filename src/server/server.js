@@ -22,23 +22,34 @@ class Server {
 
   getProduct = async id => {
     if (!this.data) await this.fetchData(3000);
-    return this.data[id];
+    return this.data.sneakers[id];
   };
 
-  getFiltredContent = async filter => {
+  getFiltredContent = async (filter, match) => {
     if (!this.data) await this.fetchData(2000);
     console.log('VERY HARD CALC from server');
+
+    const filterBySex = match.params.sex;
+    const filterByPath = match.params.type;
 
     const [min, max] = filter.prices;
     let { search } = filter;
     search = search.toLowerCase();
-    const { showOnlyDiscounts } = filter;
-    const result = this.data
+    let { showOnlyDiscounts } = filter;
+    showOnlyDiscounts = filterByPath === 'sale' ? true : showOnlyDiscounts;
+    let products;
+    if (filterByPath === 'sale' || !filterByPath) {
+      products = Object.values(this.data).reduce((a, b) => a.concat(b), []);
+    } else {
+      products = this.data[filterByPath];
+    }
+    const result = products
       .filter(product => {
         const itemSearch = `${product.brand} ${product.title} ${product.style}`.toLowerCase();
         const price = product.price * (1 - product.discount / 100);
         const hasDiscount = product.discount !== 0;
         return (
+          (filterBySex ? product.sex.includes(filterBySex) : true) && // filter male or female
           (showOnlyDiscounts ? hasDiscount : true) &&
           itemSearch.includes(search) && // searchbar
           product.availableSizes.some(size => filter.sizes[size]) && // filter by sizes

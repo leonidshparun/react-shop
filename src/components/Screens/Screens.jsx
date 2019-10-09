@@ -22,15 +22,13 @@ const Screen = styled.div`
 const Screens = () => (
   <Screen>
     <Switch>
-      <Route exact path="/" component={Catalog} />
-
-      <Route path="/order" component={Cart} />
+      <Route path="/prod/:type?/:sex?" component={Catalog} />
+      <Route path="/product/:id" component={ProductPage} />
+      <Route path="/cart" component={Cart} />
 
       <Route path="/other">
         <Modal />
       </Route>
-
-      <Route path="/product/:id" component={ProductPage} />
     </Switch>
   </Screen>
 );
