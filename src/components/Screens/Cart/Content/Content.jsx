@@ -2,7 +2,8 @@ import React from 'react';
 
 import styled from 'styled-components';
 import uniqid from 'uniqid';
-import data from 'static/products/products.json';
+
+import Server from 'server/server';
 
 import Image from './Image/Image';
 import Description from './Description/Description';
@@ -29,7 +30,8 @@ const Container = styled.tbody`
 const Heading = ({ items, total, remove }) => (
   <Container>
     {items.map((item, idx) => {
-      const product = data.products[item.id - 1];
+      const product = Server.getProduct(item.id - 1).then(pr => pr);
+      console.log(product);
       total(product.price);
       const { id, title, brand, style, price } = product;
       return (

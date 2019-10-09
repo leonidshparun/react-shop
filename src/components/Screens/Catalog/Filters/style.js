@@ -10,14 +10,14 @@ export const Container = styled.div`
   justify-content: center;
   z-index: ${zIndex.filter};
 
-  grid-template-columns: auto 190px 220px auto 170px 150px;
+  grid-template-columns: auto 190px 220px 170px 150px;
   grid-gap: 10px;
   grid-template-areas:
-    'sc sc aa aa aa aa'
-    'ti mn pr dc sz st';
+    'sc sc aa aa aa'
+    'ti mn pr sz st';
 
   @media ${devices.laptopM} {
-    grid-template-columns: auto 170px 200px auto 140px 140px;
+    grid-template-columns: auto 170px 200px 140px 140px;
   }
 
   @media ${devices.laptopS} {
@@ -25,7 +25,7 @@ export const Container = styled.div`
     grid-template-areas:
       'sc st st'
       'ti mn mn'
-      'sz pr dc';
+      'sz pr pr';
   }
 
   @media ${devices.mobileL} {
@@ -36,7 +36,7 @@ export const Container = styled.div`
       'st st'
       'ti ti'
       'mn mn'
-      'pr dc'
+      'pr pr'
       'sz sz';
   }
 
@@ -48,7 +48,7 @@ export const Container = styled.div`
       'st st'
       'ti ti'
       'mn mn'
-      'pr dc'
+      'pr pr'
       'sz sz';
   }
 `;

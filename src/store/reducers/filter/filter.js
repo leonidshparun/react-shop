@@ -3,8 +3,7 @@ import {
   UPDATE_PRICES,
   UPDATE_SIZES,
   UPDATE_SEARCH,
-  UPDATE_SORT_PRICES,
-  UPDATE_DISCOUNTS
+  UPDATE_SORT_PRICES
 } from '../../actions/action-types';
 
 import data from '../../../static/products/products.json';
@@ -47,8 +46,7 @@ const initialState = {
   sortPrices: 'init',
   sizesAll: Object.keys(sizes),
   brandsAll: { ...brands },
-  initialPrices,
-  showOnlyDiscounts: false
+  initialPrices
 };
 
 const filterReducer = (state = initialState, action) => {
@@ -63,8 +61,6 @@ const filterReducer = (state = initialState, action) => {
       return updateObject(state, { search: action.input });
     case UPDATE_SORT_PRICES:
       return updateObject(state, { sortPrices: action.types });
-    case UPDATE_DISCOUNTS:
-      return updateObject(state, { showOnlyDiscounts: action.value });
     default:
       return state;
   }

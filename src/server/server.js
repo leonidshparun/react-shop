@@ -22,7 +22,8 @@ class Server {
 
   getProduct = async id => {
     if (!this.data) await this.fetchData(3000);
-    return this.data.sneakers[id];
+    const product = this.data.sneakers[id];
+    return product;
   };
 
   getFiltredContent = async (filter, match) => {
@@ -35,8 +36,7 @@ class Server {
     const [min, max] = filter.prices;
     let { search } = filter;
     search = search.toLowerCase();
-    let { showOnlyDiscounts } = filter;
-    showOnlyDiscounts = filterByPath === 'sale' ? true : showOnlyDiscounts;
+    const showOnlyDiscounts = filterByPath === 'sale';
     let products;
     if (filterByPath === 'sale' || !filterByPath) {
       products = Object.values(this.data).reduce((a, b) => a.concat(b), []);
