@@ -36,6 +36,7 @@ export const Wrapper = styled.header`
   border-bottom: 1px solid ${Colors.border};
   grid-template-columns: ${props =>
     props.isFull ? '120px 40px 260px 40px 120px' : '120px 40px auto 40px 40px'};
+  height: ${props => (props.isFull ? 'auto' : '46px')};
   grid-gap: 10px;
   grid-template-areas: ${props =>
     props.isFull ? FullTemplate : ShrinkTemplate};

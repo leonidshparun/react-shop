@@ -6,7 +6,7 @@ export const Colors = {
   activeLink: '#a40000',
   backgroundMain: 'white',
   backgroundHelper: '#efeff1',
-  buttonActive: '#1b1a20',
+  buttonActive: '#222',
   buttonDisabled: '#607D8B',
   buttonHover: '#4CAF50'
 };

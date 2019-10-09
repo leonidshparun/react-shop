@@ -2,7 +2,7 @@ import React from 'react';
 
 import uniqid from 'uniqid';
 
-import Product from '../Product/Product';
+import Product from './Product/Product';
 
 import Container from './style';
 

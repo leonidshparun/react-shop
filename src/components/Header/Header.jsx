@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 
-import Navigation from 'components/Navigation/Navigation';
 import Logo from 'shared/Logo/Logo';
+
+import Navigation from './Navigation/Navigation';
 
 import Tip from './Tip/Tip';
 import CartButton from './CartButton/CartButton';
@@ -34,8 +35,8 @@ class Header extends Component {
   handleScroll = () => {
     const { isFull } = this.state;
     if (
-      document.body.scrollTop > 180 ||
-      document.documentElement.scrollTop > 180
+      document.body.scrollTop > 60 ||
+      document.documentElement.scrollTop > 60
     ) {
       if (isFull === true) {
         this.setState({ isFull: false });
