@@ -3,8 +3,6 @@ import React from 'react';
 import styled from 'styled-components';
 import uniqid from 'uniqid';
 
-import Server from 'server/server';
-
 import Image from './Image/Image';
 import Description from './Description/Description';
 import UnitPrice from './UnitPrice/UnitPrice';
@@ -18,10 +16,10 @@ const Container = styled.tbody`
 
   td {
     border: 1px solid #ddd;
-    vertical-align: middle;
     padding: 7px 10px;
     border-width: 1px 0;
-    text-align: center;
+    vertical-align: middle;
+    text-align: left;
     min-width: 40px;
     max-width: 170px;
   }
@@ -29,8 +27,7 @@ const Container = styled.tbody`
 
 const Content = ({ items, total, remove }) => (
   <Container>
-    {items.map((item, idx) => {
-      const product = Server.getProduct(item.id - 1);
+    {items.map((product, idx) => {
       total(product.price);
       const { id, title, brand, style, price } = product;
       return (
