@@ -10,27 +10,20 @@ import data from '../../../static/products/products.json';
 
 import { updateObject } from '../../../utils/utils';
 
-const brandsAll = [
-  ...new Set(data.products.sneakers.map(product => product.brand))
-];
+const brandsAll = [...new Set(data.products.map(product => product.brand))];
 const brands = {};
 brandsAll.forEach(brand => {
   brands[brand] = true;
 });
 
-const pricesRange = [
-  ...new Set(data.products.sneakers.map(product => product.price))
-];
+const pricesRange = [...new Set(data.products.map(product => product.price))];
 const prices = [Math.min(...pricesRange), Math.max(...pricesRange)];
 
 const initialPrices = [...prices];
 
 const sizesAll = [
   ...new Set(
-    data.products.sneakers.reduce(
-      (acc, val) => acc.concat(val.availableSizes),
-      []
-    )
+    data.products.reduce((acc, val) => acc.concat(val.availableSizes), [])
   )
 ];
 const sizes = {};
