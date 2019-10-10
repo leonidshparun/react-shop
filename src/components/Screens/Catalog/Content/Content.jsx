@@ -17,7 +17,7 @@ class ContentConnected extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      itemsPerPage: 500,
+      itemsPerPage: 50,
       currentPage: 0,
       content: null,
       loading: true

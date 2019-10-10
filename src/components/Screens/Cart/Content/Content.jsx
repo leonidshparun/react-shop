@@ -27,11 +27,10 @@ const Container = styled.tbody`
   }
 `;
 
-const Heading = ({ items, total, remove }) => (
+const Content = ({ items, total, remove }) => (
   <Container>
     {items.map((item, idx) => {
-      const product = Server.getProduct(item.id - 1).then(pr => pr);
-      console.log(product);
+      const product = Server.getProduct(item.id - 1);
       total(product.price);
       const { id, title, brand, style, price } = product;
       return (
@@ -48,4 +47,4 @@ const Heading = ({ items, total, remove }) => (
   </Container>
 );
 
-export default Heading;
+export default Content;
