@@ -9,7 +9,6 @@ export default styled.thead`
     color: ${Colors.textMain};
     font-weight: bold;
     padding: 8px;
-    background: ${Colors.backgroundHelper};
     vertical-align: middle;
     text-transform: uppercase;
     font-size: 13px;

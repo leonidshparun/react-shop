@@ -16,7 +16,7 @@ const Screen = styled.div`
   align-items: center;
   min-width: 320px;
   min-height: calc(100vh - 70px);
-  padding: 145px 0 60px;
+  padding: 125px 0 60px;
 `;
 
 const Screens = () => (
