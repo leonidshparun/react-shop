@@ -76,7 +76,9 @@ const ProductPageConnected = ({ match, addItem }) => {
               active
               height="80px"
               type="button"
-              onClick={() => addItem({ id, size: selectedSize[0] })}
+              onClick={() =>
+                addItem({ id, size: selectedSize[0], quantity: 1 })
+              }
             >
               ADD TO CART
             </Button>

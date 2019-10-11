@@ -20,13 +20,14 @@ class Server {
     this.timer = null;
   };
 
-  getProduct = async id => {
-    if (!this.data) await this.fetchData(2000);
-    return this.data[id];
+  getProduct = async (id, size, quantity) => {
+    if (!this.data) await this.fetchData(500);
+    const product = { ...this.data[id], size, quantity };
+    return product;
   };
 
   getFiltredContent = async (filter, match) => {
-    if (!this.data) await this.fetchData(2000);
+    if (!this.data) await this.fetchData(500);
     console.log('VERY HARD CALC from server');
 
     // filter params
