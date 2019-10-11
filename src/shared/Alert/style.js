@@ -6,7 +6,9 @@ export default styled.p`
   color: #8a6d3b;
   font-size: 18px;
   text-align: center;
-  padding: 10px;
+  padding: 15px;
   border-radius: 15px;
   border: 1px solid #faebcc;
+  margin-top: auto;
+  margin-bottom: auto;
 `;
