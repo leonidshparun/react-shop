@@ -8,7 +8,7 @@ export const NavContainer = styled.nav`
       display: none;
     }
     max-width: 80vw;
-    min-width: 320px;
+    min-width: 260px;
     overflow: auto;
     white-space: nowrap;
   }
@@ -18,6 +18,7 @@ export const NavItem = styled.li`
   display: inline-block;
   text-align: center;
   text-decoration: none;
+
   a {
     text-decoration: none;
     display: flex;
@@ -31,6 +32,7 @@ export const NavItem = styled.li`
     border-bottom: 1px solid transparent;
     transition: all 0.25s ease-in;
     font-stretch: expanded;
+
     :hover {
       border-bottom: 1px solid ${Colors.borderHover};
     }

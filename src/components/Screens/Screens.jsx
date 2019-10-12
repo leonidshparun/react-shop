@@ -9,14 +9,14 @@ import Modal from 'shared/UI/Modal/Modal';
 
 import ProductPage from 'components/Screens/Product/Product';
 
-const Screen = styled.div`
+const Screen = styled.main`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   min-width: 320px;
-  min-height: calc(100vh - 70px);
-  padding: 125px 0 60px;
+  min-height: 600px;
+  padding: 155px 0 60px;
 `;
 
 const Screens = () => (

@@ -4,6 +4,7 @@ import devices from 'style/responsive';
 import { Colors, zIndex } from 'style/constants';
 
 const FullTemplate = `
+    'hd hd hd hd hd'
     'tip aa logo cc cart'
     'qq nav nav nav bb'
 `;
@@ -21,17 +22,22 @@ const ShrinkTemplateMobile = `
     'nav nav cart'
 `;
 
-export const Wrapper = styled.header`
+export const HeaderWrapper = styled.header`
+  position: fixed;
+  width: 100%;
+  z-index: ${zIndex.header};
+`;
+
+export const Subheading = styled.div`
   min-width: 320px;
   display: grid;
   justify-content: center;
   justify-items: center;
   align-items: center;
-  position: fixed;
   width: 100%;
-  z-index: ${zIndex.header};
+  top: ${props => (props.isFull ? 'auto' : '0')};
   margin: 0 auto;
-  transition: ${props => (!props.isFull ? 'all 0.3s ease-in-out' : 'none')};
+  transition: ${props => (!props.isFull ? 'top 0.3s ease-in-out' : 'none')};
   background: ${Colors.backgroundMain};
   border-bottom: 1px solid ${Colors.border};
   grid-template-columns: ${props =>
@@ -68,6 +74,7 @@ export const NavWrapper = styled.div`
 
 export const TipWrapper = styled.div`
   grid-area: tip;
+  text-align: center;
   display: ${props => (props.isFull ? 'flex' : 'none')};
 
   @media ${devices.laptopS} {

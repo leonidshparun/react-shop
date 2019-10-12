@@ -5,7 +5,7 @@ export const Colors = {
   borderHover: '#6477b9',
   activeLink: '#a40000',
   backgroundMain: 'white',
-  backgroundHelper: '#efeff1',
+  backgroundHelper: '#2e3033',
   buttonActive: '#222',
   buttonDisabled: '#607D8B',
   buttonHover: '#4CAF50'

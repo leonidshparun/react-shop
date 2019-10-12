@@ -2,17 +2,19 @@ import React, { Component } from 'react';
 
 import Logo from 'shared/Logo/Logo';
 
-import Navigation from './Navigation/Navigation';
+import Heading from './Heading/Heading';
 
+import Navigation from './Navigation/Navigation';
 import Tip from './Tip/Tip';
 import CartButton from './CartButton/CartButton';
 
 import {
-  Wrapper,
+  Subheading,
   TipWrapper,
   LogoWrapper,
   CartBtnWrapper,
-  NavWrapper
+  NavWrapper,
+  HeaderWrapper
 } from './style';
 
 class Header extends Component {
@@ -35,8 +37,8 @@ class Header extends Component {
   handleScroll = () => {
     const { isFull } = this.state;
     if (
-      document.body.scrollTop > 60 ||
-      document.documentElement.scrollTop > 60
+      document.body.scrollTop > 35 ||
+      document.documentElement.scrollTop > 35
     ) {
       if (isFull === true) {
         this.setState({ isFull: false });
@@ -49,23 +51,26 @@ class Header extends Component {
   render() {
     const { isFull } = this.state;
     return (
-      <Wrapper isFull={isFull}>
-        <TipWrapper isFull={isFull}>
-          <Tip />
-        </TipWrapper>
+      <HeaderWrapper>
+        <Heading />
+        <Subheading isFull={isFull}>
+          <TipWrapper isFull={isFull}>
+            <Tip />
+          </TipWrapper>
 
-        <LogoWrapper isFull={isFull}>
-          <Logo />
-        </LogoWrapper>
+          <LogoWrapper isFull={isFull}>
+            <Logo />
+          </LogoWrapper>
 
-        <CartBtnWrapper>
-          <CartButton isFull={isFull} />
-        </CartBtnWrapper>
+          <CartBtnWrapper>
+            <CartButton isFull={isFull} />
+          </CartBtnWrapper>
 
-        <NavWrapper>
-          <Navigation />
-        </NavWrapper>
-      </Wrapper>
+          <NavWrapper>
+            <Navigation />
+          </NavWrapper>
+        </Subheading>
+      </HeaderWrapper>
     );
   }
 }
