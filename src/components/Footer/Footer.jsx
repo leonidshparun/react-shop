@@ -2,12 +2,15 @@ import React from 'react';
 
 import { Wrapper } from './style';
 
+import NewsletterForm from './NewsletterForm/NewsletterForm';
+import Information from './Information/Information';
+import Copyright from './Copyrights/Copyright';
+
 const Footer = () => (
   <Wrapper>
-    <p>CONTACT FORM</p>
-    <p>OUR OFFER</p>
-    <p>INFORMATION</p>
-    <p>COPYRIGHTS</p>
+    <NewsletterForm />
+    <Information />
+    <Copyright />
   </Wrapper>
 );
 
