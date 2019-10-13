@@ -48,11 +48,21 @@ const ProductPageConnected = ({ match, addItem }) => {
   }, [productId]);
 
   const productLoaded = () => {
-    const { price, discount, brand, title, style, id, availableSizes } = data;
+    const {
+      price,
+      discount,
+      brand,
+      title,
+      style,
+      id,
+      availableSizes,
+      imageURL
+    } = data;
+
     return (
       <ProductContainer>
         <SliderWrapper>
-          <Carousel id={id} />
+          <Carousel id={id} imageURL={imageURL} />
         </SliderWrapper>
 
         <DetailsWrapper>

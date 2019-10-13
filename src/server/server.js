@@ -1,19 +1,32 @@
 // emulate server
 
-import data from 'static/products/products.json';
+import storage from './firebase';
+import axios from './axios';
 
 class Server {
   constructor() {
     this.data = null;
     this.timer = null;
+    this.requestData();
   }
 
-  fetchData = time =>
-    new Promise(resolve => {
-      this.timer = setTimeout(() => {
-        resolve(data.products);
-      }, time);
-    }).then(this.onLoad);
+  fetchData = () =>
+    this.requestData()
+      .then(this.addImageUrls)
+      .then(this.onLoad);
+
+  requestData = async () => {
+    const response = await axios.get('/products.json');
+    return response.data;
+  };
+
+  addImageUrls = products => {
+    const withURL = products.map(async item => {
+      const imageURL = await storage.getImageURL(item.id);
+      return { ...item, imageURL };
+    });
+    return Promise.all(withURL);
+  };
 
   onLoad = content => {
     this.data = content;

@@ -3,13 +3,11 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 
 import Tag from 'shared/Tag/Tag';
-
+import Details from './Details/Details';
 import { ProductContainer, Image } from './style';
 
-import Details from './Details/Details';
-
 const Product = withRouter(({ data, history }) => {
-  const { price, discount, brand, title, style, id } = data;
+  const { price, discount, brand, title, style, id, imageURL } = data;
 
   const link = `${brand} ${title} ${style}==${id}`
     .replace(/\s|\//g, '-')
@@ -22,7 +20,7 @@ const Product = withRouter(({ data, history }) => {
       }}
       borders={{ bottom: true }}
     >
-      <Image src={`../../../img/item${id}.jpg`} alt={title} />
+      <Image src={imageURL} alt={title} />
       <Details
         price={price}
         discount={discount}

@@ -33,12 +33,22 @@ const TotalPrice = styled.td`
 `;
 
 const CartItemConnected = ({ product, idx, remove, change }) => {
-  const { id, title, brand, style, price, discount, size, quantity } = product;
+  const {
+    title,
+    brand,
+    style,
+    price,
+    discount,
+    size,
+    quantity,
+    imageURL
+  } = product;
   const priceWithDiscount = price * (1 - discount / 100) * quantity;
+
   return (
     <Container>
       <td>
-        <img src={`../../../img/item${id}.jpg`} alt={title} width="140px" />
+        <img src={imageURL} alt={title} width="140px" />
       </td>
       <Description>
         <p>{`${brand} ${title} - ${style}`}</p>

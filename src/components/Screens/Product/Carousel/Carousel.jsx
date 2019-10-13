@@ -18,7 +18,8 @@ class Gallery extends React.Component {
   };
 
   renderThumbs = () => {
-    const { items, currentIndex } = this.state;
+    const { items } = this.state;
+    const { imageURL } = this.props;
     return (
       <ThumbsContainer>
         <button
@@ -27,11 +28,7 @@ class Gallery extends React.Component {
           key={uniqid()}
           onClick={() => this.slideTo(0)}
         >
-          <img
-            src={`../img/item${currentIndex + 1}.jpg`}
-            alt="item"
-            width="100"
-          />
+          <img src={imageURL} alt="item" width="100" />
         </button>
         {items.map((item, i) => (
           <button
@@ -43,20 +40,15 @@ class Gallery extends React.Component {
             <img src="../img/item0.jpg" alt={item} width="100" />
           </button>
         ))}
-      </ThumbsContainer>
+      </ThumbsContainer> // temporary placegolders
     );
   };
 
   renderFrame = () => {
     const { currentIndex } = this.state;
 
-    return (
-      <img
-        src={`../img/item${currentIndex + 1}.jpg`}
-        alt={currentIndex}
-        width="100%"
-      />
-    );
+    const { imageURL } = this.props;
+    return <img src={imageURL} alt={currentIndex} width="100%" />;
   };
 
   render() {
