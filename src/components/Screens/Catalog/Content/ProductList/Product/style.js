@@ -33,6 +33,10 @@ export const ProductContainer = styled(Box)`
   }
 
   background: white;
+  img {
+    transition: all 0.3s ease-in-out;
+  }
+
   :hover {
     img {
       box-shadow: 0 7px 10px rgba(0, 0, 0, 0.25);

@@ -26,6 +26,7 @@ export const HeaderWrapper = styled.header`
   position: fixed;
   width: 100%;
   z-index: ${zIndex.header};
+  box-shadow: 0 1px 2px 0 #3c40430d, 0 0 5px 5px #3c40430d;
 `;
 
 export const Subheading = styled.div`
