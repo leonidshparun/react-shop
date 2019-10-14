@@ -41,7 +41,8 @@ const ProductPageConnected = ({ match, addItem }) => {
       const result = await Server.getProduct(productId - 1);
       setData(result);
       const { availableSizes } = result;
-      selectSize([availableSizes[0]]);
+      const size = availableSizes ? availableSizes[0] : null;
+      selectSize([size]);
       setIsLoading(false);
     };
     fetchData();
@@ -55,6 +56,7 @@ const ProductPageConnected = ({ match, addItem }) => {
       title,
       style,
       id,
+      type,
       availableSizes,
       imageURL
     } = data;
@@ -72,15 +74,17 @@ const ProductPageConnected = ({ match, addItem }) => {
           <PricesWrapper>
             <Prices price={price} discount={discount} />
           </PricesWrapper>
-          <SizesWrapper>
-            <p>Select size:</p>
-            <Selector
-              type="big"
-              data={availableSizes}
-              selected={selectedSize}
-              select={e => selectSize([e])}
-            />
-          </SizesWrapper>
+          {type !== 'lifestyle' ? (
+            <SizesWrapper>
+              <p>Select size:</p>
+              <Selector
+                type="big"
+                data={availableSizes}
+                selected={selectedSize}
+                select={e => selectSize([e])}
+              />
+            </SizesWrapper>
+          ) : null}
           <ButtonWrapper>
             <Button
               active

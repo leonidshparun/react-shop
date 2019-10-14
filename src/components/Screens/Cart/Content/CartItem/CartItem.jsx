@@ -52,7 +52,7 @@ const CartItemConnected = ({ product, idx, remove, change }) => {
       </td>
       <Description>
         <p>{`${brand} ${title} - ${style}`}</p>
-        <p>Size: {size}</p>
+        {size ? <p>Size: {size}</p> : null}
       </Description>
       <td>
         <Prices discount={discount} price={price} />

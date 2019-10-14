@@ -1,5 +1,7 @@
 // emulate server
 
+import { filterData } from 'utils/filter';
+
 import storage from './firebase';
 import axios from './axios';
 
@@ -15,6 +17,16 @@ class Server {
       .then(this.addImageUrls)
       .then(this.onLoad);
 
+  onLoad = content => {
+    this.data = content;
+    this.timer = null;
+  };
+
+  getData = async () => {
+    if (!this.data) await this.fetchData();
+    return this.data;
+  };
+
   requestData = async () => {
     const response = await axios.get('/products.json');
     return response.data;
@@ -28,11 +40,6 @@ class Server {
     return Promise.all(withURL);
   };
 
-  onLoad = content => {
-    this.data = content;
-    this.timer = null;
-  };
-
   getProduct = async (id, size, quantity) => {
     if (!this.data) await this.fetchData(500);
     const product = { ...this.data[id], size, quantity };
@@ -41,43 +48,14 @@ class Server {
 
   getFiltredContent = async (filter, match) => {
     if (!this.data) await this.fetchData(500);
-    console.log('VERY HARD CALC from server');
-
-    // filter params
-    const { search } = filter;
+    console.log('VERY HARD CALC');
     const { type, sex } = match.params;
-    const productType = type !== 'sale' ? type : null;
-    const [min, max] = filter.prices;
-    const showOnlyWithDiscount = type === 'sale';
-
-    const filtredData = this.data
-      .filter(product => {
-        const itemSearch = `${product.brand} ${product.title} ${product.style}`;
-        const price = product.price * (1 - product.discount / 100);
-        const hasDiscount = product.discount !== 0;
-        return (
-          (productType ? product.type === productType : true) && // filter by type
-          (sex ? product.sex.includes(sex) : true) && // filter sex
-          (showOnlyWithDiscount ? hasDiscount : true) && // filter by disounts
-          itemSearch.toLowerCase().includes(search.toLowerCase()) && // searchbar
-          product.availableSizes.some(size => filter.sizes[size]) && // filter by sizes
-          (price >= min && price <= max) && // filter by prices
-          filter.brands[product.brand] // filter by brands
-        );
-      })
-      .sort((a, b) => {
-        if (filter.sortPrices === 'init') return true;
-        const priceA = a.price * (1 - a.discount / 100);
-        const priceB = b.price * (1 - b.discount / 100);
-        return filter.sortPrices === 'min' ? priceA - priceB : priceB - priceA;
-      }); // sort by prices
-
-    console.log('server delay emulation');
-    return new Promise(resolve => {
-      this.timer = setTimeout(() => {
-        resolve(filtredData);
-      }, 500);
-    });
+    const filterConfig = {
+      ...filter.config,
+      type,
+      sex
+    };
+    return filterData(this.data, filterConfig);
   };
 }
 

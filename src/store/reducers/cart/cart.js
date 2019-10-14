@@ -2,12 +2,20 @@ import {
   ADD_ITEM,
   REMOVE_ITEM,
   CHANGE_QUANTITY
-} from '../../actions/action-types';
+} from 'store/actions/action-types';
 
 const cartReducer = (state = [], action) => {
   switch (action.type) {
     case ADD_ITEM: {
-      return [...state, action.item];
+      const currentItems = [...state];
+      const isInCart = currentItems.findIndex(
+        item => item.id === action.item.id && item.size === action.item.size
+      );
+      if (isInCart !== -1) {
+        currentItems[isInCart].quantity += 1;
+        return currentItems;
+      }
+      return [...currentItems, action.item];
     }
     case REMOVE_ITEM: {
       const updatedItems = [

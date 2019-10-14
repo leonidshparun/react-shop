@@ -18,9 +18,8 @@ class FirebaseStorage {
   }
 
   async init() {
-    await firebase.initializeApp(this.config);
+    firebase.initializeApp(this.config);
     this.storage = firebase.storage();
-    console.log('storage init');
   }
 
   getImageURL = id => {
