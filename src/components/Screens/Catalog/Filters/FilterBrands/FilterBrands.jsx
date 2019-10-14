@@ -38,7 +38,7 @@ const FilterBrandsConnected = ({ initial, updateFilter }) => {
 };
 
 const mapStateToProps = state => ({
-  initial: state.filter.brandsAll
+  initial: state.filter.base.brandsList
 });
 
 const mapDispatchToProps = dispatch => ({

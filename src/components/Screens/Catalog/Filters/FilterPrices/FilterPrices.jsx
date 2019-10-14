@@ -43,8 +43,8 @@ const FilterPricesConnected = ({ initial, updateFilter, prices }) => {
 };
 
 const mapStateToProps = state => ({
-  prices: state.filter.prices,
-  initial: state.filter.initialPrices
+  prices: state.filter.config.pricesRange,
+  initial: state.filter.base.pricesRange
 });
 
 const mapDispatchToProps = dispatch => ({

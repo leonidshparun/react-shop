@@ -17,7 +17,7 @@ const FilterSearchConnected = ({ updateFilter }) => (
 );
 
 const mapStateToProps = state => ({
-  input: state.filter.input
+  input: state.filter.config.search
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -1,59 +1,46 @@
+import { updateObject } from 'utils/utils';
+
 import {
   UPDATE_BRANDS,
   UPDATE_PRICES,
   UPDATE_SIZES,
   UPDATE_SEARCH,
-  UPDATE_SORT_PRICES
-} from '../../actions/action-types';
+  UPDATE_SORT_PRICES,
+  BUILD_FILTER_CONFIG
+} from 'store/actions/action-types';
 
-import data from '../../../static/products/products.json';
-
-import { updateObject } from '../../../utils/utils';
-
-const brandsAll = [...new Set(data.products.map(product => product.brand))];
-const brands = {};
-brandsAll.forEach(brand => {
-  brands[brand] = true;
-});
-
-const pricesRange = [...new Set(data.products.map(product => product.price))];
-const prices = [Math.min(...pricesRange), Math.max(...pricesRange)];
-
-const initialPrices = [...prices];
-
-const sizesAll = [
-  ...new Set(
-    data.products.reduce((acc, val) => acc.concat(val.availableSizes), [])
-  )
-];
-const sizes = {};
-sizesAll.forEach(size => {
-  sizes[size] = true;
-});
-
-const initialState = {
-  brands,
-  prices,
-  sizes,
-  search: '',
-  sortPrices: 'init',
-  sizesAll: Object.keys(sizes),
-  brandsAll: { ...brands },
-  initialPrices
-};
-
-const filterReducer = (state = initialState, action) => {
+const filterReducer = (state = {}, action) => {
   switch (action.type) {
+    case BUILD_FILTER_CONFIG:
+      return {
+        base: { ...action.config },
+        config: { ...action.config }
+      };
     case UPDATE_BRANDS:
-      return updateObject(state, { brands: action.brands });
+      return {
+        base: state.base,
+        config: updateObject(state.config, { brandsList: action.brands })
+      };
     case UPDATE_PRICES:
-      return updateObject(state, { prices: action.prices });
+      return {
+        base: state.base,
+        config: updateObject(state.config, { pricesRange: action.prices })
+      };
     case UPDATE_SIZES:
-      return updateObject(state, { sizes: action.sizes });
+      return {
+        base: state.base,
+        config: updateObject(state.config, { sizesList: action.sizes })
+      };
     case UPDATE_SEARCH:
-      return updateObject(state, { search: action.input });
+      return {
+        base: state.base,
+        config: updateObject(state.config, { search: action.input })
+      };
     case UPDATE_SORT_PRICES:
-      return updateObject(state, { sortPrices: action.types });
+      return {
+        base: state.base,
+        config: updateObject(state.config, { sortOrder: action.types })
+      };
     default:
       return state;
   }

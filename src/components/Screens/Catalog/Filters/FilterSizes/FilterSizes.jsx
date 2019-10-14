@@ -33,7 +33,7 @@ const FilterSizesConnected = ({ initial, sizes, updateFilter }) => {
 
   const selectAllSizes = () => {
     const copySizes = {};
-    initial.forEach(key => {
+    Object.keys(initial).forEach(key => {
       copySizes[key] = true;
     });
     updateFilterState(false);
@@ -65,7 +65,7 @@ const FilterSizesConnected = ({ initial, sizes, updateFilter }) => {
 
       <FilterOptions show={isOptionsVisible}>
         <Selector
-          data={initial}
+          data={Object.keys(initial)}
           select={size => handleSizeChange(size)}
           selected={selected}
         />
@@ -75,8 +75,8 @@ const FilterSizesConnected = ({ initial, sizes, updateFilter }) => {
 };
 
 const mapStateToProps = state => ({
-  sizes: state.filter.sizes,
-  initial: state.filter.sizesAll
+  sizes: state.filter.config.sizesList,
+  initial: state.filter.base.sizesList
 });
 
 const mapDispatchToProps = dispatch => ({

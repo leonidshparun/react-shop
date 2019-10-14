@@ -33,7 +33,7 @@ const SortPricesConnected = ({ updateSort }) => {
 };
 
 const mapStateToProps = state => ({
-  sortPrices: state.filter.sortPrices
+  sortPrices: state.filter.config.sortOrder
 });
 
 const mapDispatchToProps = dispatch => ({
