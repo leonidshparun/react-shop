@@ -53,9 +53,9 @@ const CartConnected = ({ items }) => {
       (item, idx) =>
         `Item ${idx + 1}: ${item.brand} ${item.title} - ${item.style}, Size: ${
           item.size
-        }\n`
+        }`
     );
-    alert(`Your ORDER: \n${order}`);
+    alert(`Your ORDER: \n${order.join('\n')}`);
   };
 
   const cart = items.length ? (
