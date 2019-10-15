@@ -49,11 +49,11 @@ class Server {
   getFiltredContent = async (filter, match) => {
     if (!this.data) await this.fetchData(500);
     console.log('VERY HARD CALC');
-    const { type, sex } = match.params;
+    const { type, gender } = match.params;
     const filterConfig = {
       ...filter.config,
       type,
-      sex
+      gender
     };
     return filterData(this.data, filterConfig);
   };

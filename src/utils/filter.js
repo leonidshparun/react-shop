@@ -28,7 +28,7 @@ const buildFIlterConfig = data => {
 
 export const filterData = (data, filterConfig) => {
   const { search } = filterConfig;
-  const { type, sex } = filterConfig;
+  const { type, gender } = filterConfig;
   const showOnlyWithDiscount = type === 'sale';
   const productType = type !== 'sale' ? type : null;
   const [min, max] = filterConfig.pricesRange;
@@ -39,7 +39,7 @@ export const filterData = (data, filterConfig) => {
       const hasDiscount = product.discount !== 0;
       return (
         (productType ? product.type === productType : true) && // filter by type
-        (sex ? product.sex.includes(sex) : true) && // filter sex
+        (gender ? product.gender.includes(gender) : true) && // filter gender
         (showOnlyWithDiscount ? hasDiscount : true) && // filter by disounts
         (product.type !== 'lifestyle'
           ? product.availableSizes.some(size => filterConfig.sizesList[size])
