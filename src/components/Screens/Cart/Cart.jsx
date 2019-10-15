@@ -7,11 +7,13 @@ import Alert from 'shared/Alert/Alert';
 
 import Spinner from 'shared/UI/Spinner/Spinner';
 
+import Button from 'shared/UI/Button/Button';
+
 import Heading from './Heading/Heading';
 import Content from './Content/Content';
 import Footer from './Footer/Footer';
 
-import { CartContainer } from './style';
+import { CartContainer, Table } from './style';
 
 const CartConnected = ({ items }) => {
   const [data, setData] = useState([]);
@@ -46,6 +48,16 @@ const CartConnected = ({ items }) => {
 
   updateTotal(data);
 
+  const submitOrder = () => {
+    const order = data.map(
+      (item, idx) =>
+        `Item ${idx + 1}: ${item.brand} ${item.title} - ${item.style}, Size: ${
+          item.size
+        }\n`
+    );
+    alert(`Your ORDER: \n${order}`);
+  };
+
   const cart = items.length ? (
     <CartContainer>
       <p
@@ -56,11 +68,16 @@ const CartConnected = ({ items }) => {
       >
         SHOPPING-CART SUMMARY
       </p>
-      <table>
+      <Table>
         <Heading />
         <Content items={data} />
         <Footer total={total} />
-      </table>
+      </Table>
+      <div style={{ float: 'right', marginTop: 10 }}>
+        <Button onClick={submitOrder} height="40px" width="320px" active>
+          ORDER
+        </Button>
+      </div>
     </CartContainer>
   ) : (
     <Alert message="Your shopping cart is empty" />

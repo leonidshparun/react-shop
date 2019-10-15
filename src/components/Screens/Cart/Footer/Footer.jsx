@@ -13,18 +13,22 @@ const Container = styled.tfoot`
     padding: 8px;
     vertical-align: middle;
     text-transform: uppercase;
-    font-size: 13px;
+    font-size: 20px;
     text-align: center;
+    empty-cells: hide;
+    min-width: 100px;
   }
 `;
 
 const Footer = ({ total }) => (
   <Container>
     <tr>
-      <td>Price:</td>
-      <td>{total.price.toFixed(2)}</td>
-      <td>Discount:</td>
-      <td>{total.discount.toFixed(2)}</td>
+      <td />
+      <td />
+      <td />
+      <td />
+      <td>Total:</td>
+      <td>{total.price.toFixed(2)} €</td>
     </tr>
   </Container>
 );

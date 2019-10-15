@@ -11,4 +11,5 @@ export default styled.div`
   border: 1px solid ${Colors.border};
   padding: 3px;
   border-radius: 15px;
+  height: 33px;
 `;

@@ -28,7 +28,7 @@ const DeleteBtn = styled.button`
 
 const TotalPrice = styled.td`
   p {
-    font-size: 22px;
+    font-size: 20px;
   }
 `;
 

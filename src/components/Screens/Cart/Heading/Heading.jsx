@@ -9,7 +9,7 @@ const Heading = () => (
       <td>DESCRIPTION</td>
       <td>UNIT PRICE</td>
       <td>QTY</td>
-      <td> </td>
+      <td />
       <td>TOTAL</td>
     </tr>
   </Container>

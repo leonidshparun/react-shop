@@ -12,8 +12,8 @@ import ProductPage from 'components/Screens/Product/Product';
 const Screen = styled.main`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+  justify-content: center;
+  overflow-x: auto;
   min-width: 320px;
   min-height: 600px;
   padding: 155px 0 60px;
@@ -21,16 +21,18 @@ const Screen = styled.main`
 
 const Screens = () => (
   <Screen>
-    <Switch>
-      <Route exact path="/" component={Catalog} />
-      <Route path="/prod/:type?/:sex?" component={Catalog} />
-      <Route path="/product/:id" component={ProductPage} />
-      <Route path="/cart" component={Cart} />
+    <div style={{ margin: '0 auto' }}>
+      <Switch>
+        <Route exact path="/" component={Catalog} />
+        <Route path="/prod/:type?/:gender?" component={Catalog} />
+        <Route path="/product/:id" component={ProductPage} />
+        <Route path="/cart" component={Cart} />
 
-      <Route path="/other">
-        <Modal />
-      </Route>
-    </Switch>
+        <Route path="/other">
+          <Modal />
+        </Route>
+      </Switch>
+    </div>
   </Screen>
 );
 

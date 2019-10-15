@@ -15,15 +15,15 @@ const Container = styled.tbody`
     border-width: 1px 0;
     vertical-align: middle;
     text-align: center;
-    min-width: 60px;
+    min-width: 80px;
   }
 `;
 
 const Content = ({ items }) => (
   <Container>
-    {items.map((product, idx) => {
-      return <CartItem key={uniqid()} product={product} idx={idx} />;
-    })}
+    {items.map((product, idx) => (
+      <CartItem key={uniqid()} product={product} idx={idx} />
+    ))}
   </Container>
 );
 
