@@ -49,7 +49,9 @@ export const buildFilterConfig = () => async dispatch => {
     dispatch({ type: BUILD_FILTER_CONFIG, config });
     dispatch(fetchDataSuccess());
   } catch (exc) {
-    fetchDataError('Sorry, the service is not available at this time');
+    dispatch(
+      fetchDataError('Sorry, the service is not available at this time')
+    );
   }
 };
 
