@@ -37,7 +37,7 @@ const CartConnected = ({ items }) => {
     const fetchData = async () => {
       setIsLoading(true);
       const dataFromServer = items.map(item =>
-        Server.getProduct(item.id - 1, item.size, item.quantity)
+        Server.getProduct(item.id, item.size, item.quantity)
       );
       const loadedData = await Promise.all(dataFromServer);
       setData(loadedData);
@@ -49,13 +49,16 @@ const CartConnected = ({ items }) => {
   updateTotal(data);
 
   const submitOrder = () => {
-    const order = data.map(
-      (item, idx) =>
-        `Item ${idx + 1}: ${item.brand} ${item.title} - ${item.style}, Size: ${
-          item.size
-        }`
-    );
-    alert(`Your ORDER: \n${order.join('\n')}`);
+    const order = data.map(item => {
+      const { brand, discount, id, price, style, title, size, quantity } = item;
+      return { brand, discount, id, price, style, title, size, quantity };
+    });
+    Server.submitOrder({
+      order,
+      total: total.price.toFixed(2),
+      customer: 'customer data...',
+      timestamp: new Date().toISOString()
+    });
   };
 
   const cart = items.length ? (
@@ -73,7 +76,7 @@ const CartConnected = ({ items }) => {
         <Content items={data} />
         <Footer total={total} />
       </Table>
-      <div style={{ float: 'right', marginTop: 10 }}>
+      <div style={{ float: 'right', marginTop: 15 }}>
         <Button onClick={submitOrder} height="40px" width="320px" active>
           ORDER
         </Button>

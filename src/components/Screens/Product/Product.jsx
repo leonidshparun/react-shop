@@ -30,7 +30,7 @@ import Carousel from './Carousel/Carousel';
 const ProductPageConnected = ({ match, addItem }) => {
   const [, productId] = match.params.id.split('==');
 
-  const [data, setData] = useState({});
+  const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   const [selectedSize, selectSize] = useState([0]);
@@ -38,7 +38,7 @@ const ProductPageConnected = ({ match, addItem }) => {
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
-      const result = await Server.getProduct(productId - 1);
+      const result = await Server.getProduct(productId);
       setData(result);
       const { availableSizes } = result;
       const size = availableSizes ? availableSizes[0] : null;

@@ -5,7 +5,6 @@ import styled from 'styled-components';
 
 import Catalog from 'components/Screens/Catalog/Catalog';
 import Cart from 'components/Screens/Cart/Cart';
-import Modal from 'shared/UI/Modal/Modal';
 
 import ProductPage from 'components/Screens/Product/Product';
 
@@ -27,10 +26,6 @@ const Screens = () => (
         <Route path="/prod/:type?/:gender?" component={Catalog} />
         <Route path="/product/:id" component={ProductPage} />
         <Route path="/cart" component={Cart} />
-
-        <Route path="/other">
-          <Modal />
-        </Route>
       </Switch>
     </div>
   </Screen>
