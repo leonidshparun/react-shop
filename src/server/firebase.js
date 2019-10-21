@@ -2,6 +2,8 @@ import * as firebase from 'firebase/app';
 
 import 'firebase/storage';
 
+const EMPTY_PIC_SRC = '../../img/item0.jpg';
+
 class FirebaseStorage {
   constructor() {
     this.storage = null;
@@ -30,10 +32,13 @@ class FirebaseStorage {
     const fileName = `item${id}.jpg`;
     const itemRef = imagesRef.child(fileName);
 
-    return itemRef.getDownloadURL().then(url => {
-      this.cache[id] = url;
-      return url;
-    });
+    return itemRef
+      .getDownloadURL()
+      .then(url => {
+        this.cache[id] = url;
+        return url;
+      })
+      .catch(() => EMPTY_PIC_SRC);
   };
 }
 

@@ -30,8 +30,6 @@ export const updateSortPrices = types => ({ type: UPDATE_SORT_PRICES, types });
 
 export const changeQuantity = item => ({ type: CHANGE_QUANTITY, item });
 
-export const fetchDataError = () => ({ type: FETCH_DATA_ERROR });
-
 export const fetchDataStarted = () => ({ type: FETCH_DATA_START });
 
 export const fetchDataSuccess = () => ({
@@ -39,13 +37,19 @@ export const fetchDataSuccess = () => ({
   payload: true
 });
 
+export const fetchDataError = error => ({
+  type: FETCH_DATA_ERROR,
+  payload: error
+});
+
 export const buildFilterConfig = () => async dispatch => {
   try {
     const data = await Server.getData();
     const config = getFilterBase(data);
     dispatch({ type: BUILD_FILTER_CONFIG, config });
+    dispatch(fetchDataSuccess());
   } catch (exc) {
-    dispatch({ error: exc, type: 'ERROR' });
+    fetchDataError('Sorry, the service is not available at this time');
   }
 };
 
@@ -55,6 +59,8 @@ export const fetchData = () => async dispatch => {
     await Server.getData();
     dispatch(fetchDataSuccess());
   } catch (exc) {
-    dispatch(fetchDataError());
+    dispatch(
+      fetchDataError('Sorry, the service is not available at this time')
+    );
   }
 };

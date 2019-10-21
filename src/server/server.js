@@ -11,12 +11,17 @@ class Server {
 
   fetchData = () =>
     this.requestData()
+      .catch(e => this.onError(e))
       .then(this.addImageUrls)
       .then(this.onLoad);
 
   onLoad = content => {
     this.data = content;
     this.timer = null;
+  };
+
+  onError = error => {
+    console.log(error.message);
   };
 
   getData = async () => {
@@ -56,7 +61,8 @@ class Server {
       const imageURL = await storage.getImageURL(item.id);
       return { ...item, imageURL };
     });
-    return Promise.all(withURL);
+    const dataWithImgURLS = Promise.all(withURL);
+    return dataWithImgURLS;
   };
 
   getProduct = async (id, size, quantity) => {

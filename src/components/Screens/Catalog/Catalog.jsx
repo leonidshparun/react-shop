@@ -1,17 +1,21 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
-import { fetchData, buildFilterConfig } from 'store/actions/actions';
+import { buildFilterConfig } from 'store/actions/actions';
 
 import Spinner from 'shared/UI/Spinner/Spinner';
+
+import Alert from 'shared/Alert/Alert';
 
 import Filters from './Filters/Filters';
 import Content from './Content/Content';
 
-const CatalogConnected = ({ isLoaded, fetch, buildConfig }) => {
+const CatalogConnected = ({ isLoaded, buildConfig, error }) => {
+  if (error.isError) {
+    return <Alert message={error.errorMessage} />;
+  }
   if (!isLoaded) {
     buildConfig();
-    fetch();
     return <Spinner />;
   }
   return (
@@ -23,11 +27,11 @@ const CatalogConnected = ({ isLoaded, fetch, buildConfig }) => {
 };
 
 const mapStateToProps = state => ({
-  isLoaded: state.isLoaded
+  isLoaded: state.site.isLoaded,
+  error: state.site.error
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetch: () => dispatch(fetchData()),
   buildConfig: () => dispatch(buildFilterConfig())
 });
 

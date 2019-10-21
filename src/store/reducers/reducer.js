@@ -5,7 +5,7 @@ import filterReducer from './filter/filter';
 import contentReducer from './data/data';
 
 const rootReducer = combineReducers({
-  isLoaded: contentReducer,
+  site: contentReducer,
   cart: cartReducer,
   filter: filterReducer
 });
