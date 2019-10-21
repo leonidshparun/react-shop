@@ -47,7 +47,6 @@ export const buildFilterConfig = () => async dispatch => {
     const data = await Server.getData();
     const config = getFilterBase(data);
     dispatch({ type: BUILD_FILTER_CONFIG, config });
-    dispatch(fetchDataSuccess());
   } catch (exc) {
     dispatch(
       fetchDataError('Sorry, the service is not available at this time')
@@ -58,8 +57,8 @@ export const buildFilterConfig = () => async dispatch => {
 export const fetchData = () => async dispatch => {
   dispatch(fetchDataStarted());
   try {
-    await Server.getData();
-    dispatch(fetchDataSuccess());
+    const data = await Server.getData();
+    dispatch(fetchDataSuccess(data));
   } catch (exc) {
     dispatch(
       fetchDataError('Sorry, the service is not available at this time')
