@@ -10,3 +10,13 @@ export const CartContainer = styled.div`
 export const Table = styled.table`
   border-collapse: collapse;
 `;
+
+export const CartHeading = styled.p`
+  font-size: 30px;
+  padding: 14px 0;
+`;
+
+export const OrderButtonWrapper = styled.div`
+  float: right;
+  margin-top: 15px;
+`;

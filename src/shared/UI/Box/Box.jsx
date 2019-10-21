@@ -6,10 +6,10 @@ const mainColor = `1px solid ${Colors.border}`;
 const hoverColor = `1px solid ${Colors.borderHover}`;
 
 const Box = styled.div`
-  border-top: ${props => (props.borders.top ? mainColor : null)};
-  border-bottom: ${props => (props.borders.bottom ? mainColor : null)};
-  border-left: ${props => (props.borders.left ? mainColor : null)};
-  border-right: ${props => (props.borders.right ? mainColor : null)};
+  border-top: ${props => (props.top ? mainColor : null)};
+  border-bottom: ${props => (props.bottom ? mainColor : null)};
+  border-left: ${props => (props.left ? mainColor : null)};
+  border-right: ${props => (props.right ? mainColor : null)};
 
   ::before,
   ::after {
@@ -29,13 +29,13 @@ const Box = styled.div`
     transform-origin: center;
   }
   ::before {
-    border-top: ${props => (props.borders.top ? hoverColor : null)};
-    border-bottom: ${props => (props.borders.bottom ? hoverColor : null)};
+    border-top: ${props => (props.top ? hoverColor : null)};
+    border-bottom: ${props => (props.bottom ? hoverColor : null)};
     transform: scale3d(0, 1, 1);
   }
   ::after {
-    border-left: ${props => (props.borders.left ? hoverColor : null)};
-    border-right: ${props => (props.borders.right ? hoverColor : null)};
+    border-left: ${props => (props.left ? hoverColor : null)};
+    border-right: ${props => (props.right ? hoverColor : null)};
     transform: scale3d(1, 0, 1);
   }
   :hover::before,

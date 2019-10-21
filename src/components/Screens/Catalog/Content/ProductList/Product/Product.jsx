@@ -18,7 +18,7 @@ const Product = withRouter(({ data, history }) => {
       onClick={() => {
         history.push(`/product/${link}`);
       }}
-      borders={{ bottom: true }}
+      bottom
     >
       <Image src={imageURL} alt={title} />
       <Details

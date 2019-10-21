@@ -4,7 +4,7 @@ import logo from 'static/logo.png';
 
 const Logo = ({ width }) => (
   <a href="/">
-    <img src={logo} alt="compony name" width={width || '100%'} />
+    <img src={logo} alt="company name" width={width || '100%'} />
   </a>
 );
 

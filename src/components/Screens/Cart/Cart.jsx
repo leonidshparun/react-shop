@@ -13,23 +13,20 @@ import Heading from './Heading/Heading';
 import Content from './Content/Content';
 import Footer from './Footer/Footer';
 
-import { CartContainer, Table } from './style';
+import { CartContainer, Table, CartHeading, OrderButtonWrapper } from './style';
 
 const CartConnected = ({ items }) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const total = {
-    price: 0,
-    discount: 0
+    price: 0
   };
 
   const updateTotal = products => {
     products.forEach(item => {
       const sum = item.price * (1 - item.discount / 100);
-      const discount = item.price - sum;
       total.price += sum * item.quantity;
-      total.discount += discount * item.quantity;
     });
   };
 
@@ -56,31 +53,24 @@ const CartConnected = ({ items }) => {
     Server.submitOrder({
       order,
       total: total.price.toFixed(2),
-      customer: 'customer data...',
+      customer: { data: 'customer data...' },
       timestamp: new Date().toISOString()
     });
   };
 
   const cart = items.length ? (
     <CartContainer>
-      <p
-        style={{
-          fontSize: 30,
-          padding: '14px 0'
-        }}
-      >
-        SHOPPING-CART SUMMARY
-      </p>
+      <CartHeading>SHOPPING-CART SUMMARY</CartHeading>
       <Table>
         <Heading />
         <Content items={data} />
         <Footer total={total} />
       </Table>
-      <div style={{ float: 'right', marginTop: 15 }}>
+      <OrderButtonWrapper>
         <Button onClick={submitOrder} height="40px" width="320px" active>
           ORDER
         </Button>
-      </div>
+      </OrderButtonWrapper>
     </CartContainer>
   ) : (
     <Alert message="Your shopping cart is empty" />
