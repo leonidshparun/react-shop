@@ -8,6 +8,7 @@ import Alert from 'shared/Alert/Alert';
 import Spinner from 'shared/UI/Spinner/Spinner';
 
 import Button from 'shared/UI/Button/Button';
+import { showPopup } from 'store/actions/actions';
 
 import Heading from './Heading/Heading';
 import Content from './Content/Content';
@@ -15,7 +16,7 @@ import Footer from './Footer/Footer';
 
 import { CartContainer, Table, CartHeading, OrderButtonWrapper } from './style';
 
-const CartConnected = ({ items }) => {
+const CartConnected = ({ items, popup }) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -50,6 +51,7 @@ const CartConnected = ({ items }) => {
       const { brand, discount, id, price, style, title, size, quantity } = item;
       return { brand, discount, id, price, style, title, size, quantity };
     });
+    popup();
     Server.submitOrder({
       order,
       total: total.price.toFixed(2),
@@ -83,6 +85,13 @@ const mapStateToProps = state => ({
   items: state.cart
 });
 
-const Cart = connect(mapStateToProps)(CartConnected);
+const mapDispatchToProps = dispatch => ({
+  popup: () => dispatch(showPopup('THANKS FOR YOUR ORDER'))
+});
+
+const Cart = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CartConnected);
 
 export default Cart;

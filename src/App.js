@@ -7,6 +7,8 @@ import Header from 'components/Header/Header';
 import Footer from 'components/Footer/Footer';
 import Screens from 'components/Screens/Screens';
 
+import Popup from 'shared/Popup/Popup';
+
 const AppContainer = styled.div`
   position: relative;
 `;
@@ -14,6 +16,7 @@ const AppContainer = styled.div`
 const App = () => (
   <BrowserRouter>
     <AppContainer>
+      <Popup />
       <Header />
       <Screens />
       <Footer />

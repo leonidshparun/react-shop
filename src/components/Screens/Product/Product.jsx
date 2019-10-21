@@ -10,7 +10,7 @@ import Button from 'shared/UI/Button/Button';
 import Spinner from 'shared/UI/Spinner/Spinner';
 import Features from 'shared/Features/Features';
 
-import { addItemToCart } from 'store/actions/actions';
+import { addItemToCart, showPopup } from 'store/actions/actions';
 
 import {
   ProductContainer,
@@ -27,7 +27,7 @@ import Title from './Title/Title';
 import Prices from './Prices/Prices';
 import Carousel from './Carousel/Carousel';
 
-const ProductPageConnected = ({ match, addItem }) => {
+const ProductPageConnected = ({ match, addItem, popup }) => {
   const [, productId] = match.params.id.split('==');
 
   const [data, setData] = useState(null);
@@ -61,6 +61,11 @@ const ProductPageConnected = ({ match, addItem }) => {
       imageURL
     } = data;
 
+    const handleClick = () => {
+      popup();
+      addItem({ id, size: selectedSize[0], quantity: 1 });
+    };
+
     return (
       <ProductContainer>
         <SliderWrapper>
@@ -86,14 +91,7 @@ const ProductPageConnected = ({ match, addItem }) => {
             </SizesWrapper>
           ) : null}
           <ButtonWrapper>
-            <Button
-              active
-              height="80px"
-              type="button"
-              onClick={() =>
-                addItem({ id, size: selectedSize[0], quantity: 1 })
-              }
-            >
+            <Button active height="80px" type="button" onClick={handleClick}>
               ADD TO CART
             </Button>
           </ButtonWrapper>
@@ -110,7 +108,8 @@ const ProductPageConnected = ({ match, addItem }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  addItem: item => dispatch(addItemToCart(item))
+  addItem: item => dispatch(addItemToCart(item)),
+  popup: () => dispatch(showPopup('ADDED!'))
 });
 
 const ProductPage = connect(

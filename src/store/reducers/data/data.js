@@ -3,7 +3,9 @@ import { updateObject } from 'utils/utils';
 import {
   FETCH_DATA_SUCCESS,
   FETCH_DATA_START,
-  FETCH_DATA_ERROR
+  FETCH_DATA_ERROR,
+  SHOW_POPUP,
+  HIDE_POPUP
 } from 'store/actions/action-types';
 
 const initialState = {
@@ -30,6 +32,22 @@ const contentReducer = (state = initialState, action) => {
         error: updateObject(state.error, {
           isError: true,
           errorMessage: action.payload
+        })
+      };
+    case SHOW_POPUP:
+      return {
+        ...state,
+        modal: updateObject(state.modal, {
+          showModal: true,
+          modalrMessage: action.payload
+        })
+      };
+    case HIDE_POPUP:
+      return {
+        ...state,
+        modal: updateObject(state.modal, {
+          showModal: false,
+          modalrMessage: ''
         })
       };
     default:

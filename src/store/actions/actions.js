@@ -14,7 +14,9 @@ import {
   BUILD_FILTER_CONFIG,
   FETCH_DATA_ERROR,
   FETCH_DATA_START,
-  FETCH_DATA_SUCCESS
+  FETCH_DATA_SUCCESS,
+  SHOW_POPUP,
+  HIDE_POPUP
 } from './action-types';
 
 export const updateBrands = brands => ({ type: UPDATE_BRANDS, brands });
@@ -64,4 +66,12 @@ export const fetchData = () => async dispatch => {
       fetchDataError('Sorry, the service is not available at this time')
     );
   }
+};
+
+export const hidePopup = () => async dispatch => {
+  dispatch({ type: HIDE_POPUP });
+};
+
+export const showPopup = message => async dispatch => {
+  dispatch({ type: SHOW_POPUP, payload: message });
 };

@@ -6,6 +6,9 @@ import devices from 'style/responsive';
 
 import Server from 'server/server';
 
+import { connect } from 'react-redux';
+import { showPopup } from 'store/actions/actions';
+
 import { Colors } from 'style/constants';
 
 const Container = styled.section`
@@ -67,18 +70,19 @@ const Form = styled.form`
   }
 `;
 
-const NewsletterForm = () => {
+const NewsletterFormConnected = ({ popup }) => {
   const [input, updateInput] = useState('');
 
   const addMail = e => {
     e.preventDefault();
+    popup();
     Server.addEmailSubscription({ mail: input });
   };
 
   return (
     <Container>
       <Heading>NEWSLETTER</Heading>
-      <Heading sub>Don't miss anything</Heading>
+      <Heading sub>Don`t miss anything</Heading>
       <Form onSubmit={e => addMail(e)}>
         <input
           type="email"
@@ -91,4 +95,11 @@ const NewsletterForm = () => {
   );
 };
 
-export default NewsletterForm;
+const mapDispatchToProps = dispatch => ({
+  popup: () => dispatch(showPopup('THANKS'))
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(NewsletterFormConnected);
