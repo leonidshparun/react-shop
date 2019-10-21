@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import styled from 'styled-components';
 
 import devices from 'style/responsive';
+
+import Server from 'server/server';
+
 import { Colors } from 'style/constants';
 
 const Container = styled.section`
@@ -65,12 +68,23 @@ const Form = styled.form`
 `;
 
 const NewsletterForm = () => {
+  const [input, updateInput] = useState('');
+
+  const addMail = e => {
+    e.preventDefault();
+    Server.addEmailSubscription({ mail: input });
+  };
+
   return (
     <Container>
       <Heading>NEWSLETTER</Heading>
       <Heading sub>Don't miss anything</Heading>
-      <Form>
-        <input type="email" placeholder="Enter your e-mail" />
+      <Form onSubmit={e => addMail(e)}>
+        <input
+          type="email"
+          placeholder="Enter your e-mail"
+          onInput={e => updateInput(e.target.value)}
+        />
         <button type="submit">SIGN UP</button>
       </Form>
     </Container>
