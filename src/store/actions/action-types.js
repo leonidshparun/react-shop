@@ -17,3 +17,5 @@ export const FETCH_DATA_ERROR = 'FETCH_DATA_ERROR';
 
 export const SHOW_POPUP = 'SHOW_POPUP';
 export const HIDE_POPUP = 'HIDE_POPUP';
+
+export const UPDATE_FILTER_ROUTE = 'UPDATE_FILTER_ROUTE';

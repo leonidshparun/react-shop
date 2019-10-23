@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import updateFilterState from 'hooks/updateFilterState';
+
 import { connect } from 'react-redux';
 
 import Range from 'shared/UI/Range/Range';
@@ -29,6 +31,8 @@ const FilterPricesConnected = ({ initial, updateFilter, prices }) => {
   };
 
   const [min, max] = rangeValues;
+
+  updateFilterState(updateRangeValues, prices);
 
   return (
     <Container>

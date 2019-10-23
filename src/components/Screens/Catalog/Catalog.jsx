@@ -1,7 +1,12 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
-import { buildFilterConfig, fetchData } from 'store/actions/actions';
+import {
+  buildFilterConfig,
+  fetchData,
+  updateRoute
+} from 'store/actions/actions';
+import { withRouter } from 'react-router-dom';
 
 import Spinner from 'shared/UI/Spinner/Spinner';
 
@@ -10,17 +15,35 @@ import Alert from 'shared/Alert/Alert';
 import Filters from './Filters/Filters';
 import Content from './Content/Content';
 
-const CatalogConnected = ({ isLoaded, isFilterReady, build, fetch, error }) => {
+const CatalogConnected = props => {
+  const {
+    isLoaded,
+    filterBase,
+    currentRoute,
+    build,
+    fetch,
+    error,
+    match,
+    setRoute
+  } = props;
+
+  const newRoute = match.params.type;
+
   if (error.isError) {
     return <Alert message={error.errorMessage} />;
   }
 
   if (!isLoaded) {
-    fetch();
-    build();
+    fetch()
+      .then(setRoute(newRoute))
+      .then(build(newRoute));
   }
 
-  return !isLoaded || !isFilterReady ? (
+  if (currentRoute !== newRoute) {
+    setRoute(newRoute).then(build(newRoute));
+  }
+
+  return !isLoaded || !filterBase ? (
     <Spinner />
   ) : (
     <>
@@ -33,15 +56,19 @@ const CatalogConnected = ({ isLoaded, isFilterReady, build, fetch, error }) => {
 const mapStateToProps = state => ({
   isLoaded: state.site.isLoaded,
   error: state.site.error,
-  isFilterReady: state.filter.base
+  filterBase: state.filter.base,
+  currentRoute: state.filter.route
 });
 
 const mapDispatchToProps = dispatch => ({
-  build: () => dispatch(buildFilterConfig()),
-  fetch: () => dispatch(fetchData())
+  build: b => dispatch(buildFilterConfig(b)),
+  fetch: () => dispatch(fetchData()),
+  setRoute: r => dispatch(updateRoute(r))
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CatalogConnected);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(CatalogConnected)
+);

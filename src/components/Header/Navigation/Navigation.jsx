@@ -8,7 +8,6 @@ import { NavContainer, NavItem, activeLink } from './style';
 
 const links = [
   { title: 'All', path: '/prod/' },
-  { title: 'NEW', path: '/prod/sneakers' },
   { title: 'MEN SNEAKERS', path: '/prod/sneakers/men' },
   { title: 'WOMEN SNEAKERS', path: '/prod/sneakers/women' },
   { title: 'CLOTHING', path: '/prod/clothing' },

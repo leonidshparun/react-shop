@@ -1,6 +1,6 @@
 import Server from 'server/server';
 
-import getFilterBase from 'utils/filter';
+import { buildFIlterConfig as getFilterBase } from 'utils/filter';
 
 import {
   UPDATE_BRANDS,
@@ -16,7 +16,8 @@ import {
   FETCH_DATA_START,
   FETCH_DATA_SUCCESS,
   SHOW_POPUP,
-  HIDE_POPUP
+  HIDE_POPUP,
+  UPDATE_FILTER_ROUTE
 } from './action-types';
 
 export const updateBrands = brands => ({ type: UPDATE_BRANDS, brands });
@@ -44,13 +45,23 @@ export const fetchDataError = error => ({
   payload: error
 });
 
-export const buildFilterConfig = () => async dispatch => {
+export const buildFilterConfig = type => async dispatch => {
   try {
     const data = await Server.getData();
-    const config = getFilterBase(data);
+    const config = getFilterBase(data, type);
     dispatch({ type: BUILD_FILTER_CONFIG, config });
   } catch (exc) {
     dispatch(
+      fetchDataError('Sorry, the service is not available at this time')
+    );
+  }
+};
+
+export const updateRoute = route => async dispatch => {
+  try {
+    return dispatch({ type: UPDATE_FILTER_ROUTE, route });
+  } catch (exc) {
+    return dispatch(
       fetchDataError('Sorry, the service is not available at this time')
     );
   }
@@ -60,9 +71,9 @@ export const fetchData = () => async dispatch => {
   dispatch(fetchDataStarted());
   try {
     const data = await Server.getData();
-    dispatch(fetchDataSuccess(data));
+    return dispatch(fetchDataSuccess(data));
   } catch (exc) {
-    dispatch(
+    return dispatch(
       fetchDataError('Sorry, the service is not available at this time')
     );
   }

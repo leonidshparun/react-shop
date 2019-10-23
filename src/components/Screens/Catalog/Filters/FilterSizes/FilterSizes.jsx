@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import updateFilterState from 'hooks/updateFilterState';
+
 import { connect } from 'react-redux';
 import Selector from 'shared/UI/Selector/Selector';
 
@@ -16,7 +18,7 @@ import {
 } from './style';
 
 const FilterSizesConnected = ({ initial, sizes, updateFilter }) => {
-  const [isFilterEnabled, updateFilterState] = useState(false);
+  const [isFilterEnabled, toggleFilterState] = useState(false);
   const [isOptionsVisible, toggleVisibility] = useState(false);
 
   const handleSizeChange = size => {
@@ -26,7 +28,7 @@ const FilterSizesConnected = ({ initial, sizes, updateFilter }) => {
       copySizes[size] = !copySizes[size];
     } else {
       copySizes[size] = true;
-      updateFilterState(true);
+      toggleFilterState(true);
     }
     updateFilter(copySizes);
   };
@@ -36,7 +38,7 @@ const FilterSizesConnected = ({ initial, sizes, updateFilter }) => {
     Object.keys(initial).forEach(key => {
       copySizes[key] = true;
     });
-    updateFilterState(false);
+    toggleFilterState(false);
     updateFilter(copySizes);
   };
 
@@ -44,6 +46,8 @@ const FilterSizesConnected = ({ initial, sizes, updateFilter }) => {
     ? Object.keys(sizes).filter(key => sizes[key])
     : [];
 
+  updateFilterState(toggleFilterState, initial, false);
+  updateFilterState(toggleVisibility, initial, false);
   return (
     <Container>
       <Controls>

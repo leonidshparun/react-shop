@@ -20,7 +20,7 @@ const initialState = {
   }
 };
 
-const contentReducer = (state = initialState, action) => {
+const siteReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_DATA_SUCCESS:
       return updateObject(state, { isLoaded: action.payload });
@@ -55,4 +55,4 @@ const contentReducer = (state = initialState, action) => {
   }
 };
 
-export default contentReducer;
+export default siteReducer;

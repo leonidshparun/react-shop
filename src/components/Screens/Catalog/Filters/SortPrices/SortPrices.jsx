@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { connect } from 'react-redux';
 
@@ -8,12 +8,9 @@ import img from 'static/icons/order.png';
 
 import { Container, Icon, SortButton } from './style';
 
-const SortPricesConnected = ({ updateSort }) => {
-  const [sortType, changeType] = useState();
-
+const SortPricesConnected = ({ updateSort, sortPrices }) => {
   const handleChange = () => {
-    const value = sortType !== 'max' ? 'max' : 'min';
-    changeType(value);
+    const value = sortPrices !== 'max' ? 'max' : 'min';
     updateSort(value);
   };
 
@@ -22,7 +19,7 @@ const SortPricesConnected = ({ updateSort }) => {
       <span>Sort by price</span>
       <SortButton type="button">
         <Icon
-          active={sortType !== 'max'}
+          active={sortPrices !== 'max'}
           src={img}
           width={18}
           alt="reorder products by prices"

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import updateFilterState from 'hooks/updateFilterState';
+
 import { connect } from 'react-redux';
 import uniqid from 'uniqid';
 
@@ -14,6 +16,8 @@ const FilterBrandsConnected = ({ initial, updateFilter }) => {
     changeSelection(value);
     updateFilter(update);
   };
+
+  updateFilterState(changeSelection, initial);
 
   return (
     <Container>
