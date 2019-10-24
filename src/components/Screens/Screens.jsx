@@ -8,6 +8,8 @@ import Cart from 'components/Screens/Cart/Cart';
 
 import ProductPage from 'components/Screens/Product/Product';
 
+import ScrollToTop from 'hooks/scrollToTop';
+
 const Screen = styled.main`
   display: flex;
   flex-direction: column;
@@ -21,12 +23,14 @@ const Screen = styled.main`
 const Screens = () => (
   <Screen>
     <div style={{ margin: '0 auto' }}>
-      <Switch>
-        <Route exact path="/" component={Catalog} />
-        <Route path="/prod/:type?/:gender?" component={Catalog} />
-        <Route path="/product/:id" component={ProductPage} />
-        <Route path="/cart" component={Cart} />
-      </Switch>
+      <ScrollToTop>
+        <Switch>
+          <Route exact path="/" component={Catalog} />
+          <Route path="/prod/:type?/:gender?" component={Catalog} />
+          <Route path="/product/:id" component={ProductPage} />
+          <Route path="/cart" component={Cart} />
+        </Switch>
+      </ScrollToTop>
     </div>
   </Screen>
 );
