@@ -71,12 +71,12 @@ class Server {
     return product;
   };
 
-  getFiltredContent = async (filter, match) => {
+  getFiltredContent = async (config, match) => {
     if (!this.data) await this.fetchData();
     console.log('VERY HARD CALC');
     const { type, gender } = match.params;
     const filterConfig = {
-      ...filter.config,
+      ...config,
       type,
       gender
     };

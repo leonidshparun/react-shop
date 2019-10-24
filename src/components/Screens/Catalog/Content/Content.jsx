@@ -25,13 +25,10 @@ class ContentConnected extends Component {
     this.timer = null;
   }
 
-  componentDidMount() {
-    this.fetchData();
-  }
-
   componentDidUpdate(prevProps, prevState) {
     const { currentPage, itemsPerPage, content } = this.state;
-    if (prevProps !== this.props) {
+    const { filterCfg } = this.props;
+    if (prevProps.filterCfg !== filterCfg) {
       this.updateContent();
     }
     const pages = content ? Math.ceil(content.length / itemsPerPage) : 0;
@@ -41,9 +38,9 @@ class ContentConnected extends Component {
   }
 
   fetchData = () => {
-    const { filter } = this.props;
+    const { filterCfg } = this.props;
     const { match } = this.props;
-    Server.getFiltredContent(filter, match).then(this.onLoad);
+    Server.getFiltredContent(filterCfg, match).then(this.onLoad);
   };
 
   onLoad = content => {
@@ -100,7 +97,7 @@ class ContentConnected extends Component {
 }
 
 const mapStateToProps = state => ({
-  filter: state.filter
+  filterCfg: state.filter.config
 });
 
 const Content = withRouter(connect(mapStateToProps)(ContentConnected));
