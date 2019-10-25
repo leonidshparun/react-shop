@@ -2,12 +2,14 @@ import { combineReducers } from 'redux';
 
 import cartReducer from './cart/cart';
 import filterReducer from './filter/filter';
-import contentReducer from './site/site';
+import siteReducer from './site/site';
+import contentReducer from './content/content';
 
 const rootReducer = combineReducers({
-  site: contentReducer,
+  site: siteReducer,
   cart: cartReducer,
-  filter: filterReducer
+  filter: filterReducer,
+  content: contentReducer
 });
 
 export default rootReducer;

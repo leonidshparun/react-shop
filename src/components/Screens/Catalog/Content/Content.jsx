@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
-import { withRouter } from 'react-router-dom';
-import Spinner from 'shared/UI/Spinner/Spinner';
+// import Spinner from 'shared/UI/Spinner/Spinner';
 
 import Alert from 'shared/Alert/Alert';
-import Server from 'server/server';
-
 import ProductList from './ProductList/ProductList';
 import Pagination from './Pagination/Pagination';
 
@@ -18,40 +15,19 @@ class ContentConnected extends Component {
     super(props);
     this.state = {
       itemsPerPage: 50,
-      currentPage: 0,
-      content: null,
-      loading: true
+      currentPage: 0
     };
     this.timer = null;
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    const { currentPage, itemsPerPage, content } = this.state;
-    const { filterCfg } = this.props;
-    if (prevProps.filterCfg !== filterCfg) {
-      this.updateContent();
-    }
+  componentDidUpdate(prevProps) {
+    const { currentPage, itemsPerPage } = this.state;
+    const { content } = this.props;
     const pages = content ? Math.ceil(content.length / itemsPerPage) : 0;
-    if (pages !== 0 && currentPage >= pages && prevState !== this.state) {
+    if (pages !== 0 && currentPage >= pages && this.props !== prevProps) {
       this.changePageHandler(pages - 1);
     }
   }
-
-  fetchData = () => {
-    const { filterCfg } = this.props;
-    const { match } = this.props;
-    Server.getFiltredContent(filterCfg, match).then(this.onLoad);
-  };
-
-  onLoad = content => {
-    this.setState({ content, loading: false });
-    this.timer = null;
-  };
-
-  updateContent = () => {
-    this.setState({ loading: true });
-    this.fetchData();
-  };
 
   changePageHandler = page => {
     const { currentPage } = this.state;
@@ -61,7 +37,8 @@ class ContentConnected extends Component {
   };
 
   renderProducts = () => {
-    const { content, currentPage, itemsPerPage } = this.state;
+    const { currentPage, itemsPerPage } = this.state;
+    const { content } = this.props;
     let products;
 
     if (content.length) {
@@ -90,16 +67,14 @@ class ContentConnected extends Component {
   };
 
   render() {
-    const { loading } = this.state;
-    const content = loading ? <Spinner /> : this.renderProducts();
-    return <Wrapper>{content}</Wrapper>;
+    return <Wrapper>{this.renderProducts()}</Wrapper>;
   }
 }
 
 const mapStateToProps = state => ({
-  filterCfg: state.filter.config
+  content: state.content
 });
 
-const Content = withRouter(connect(mapStateToProps)(ContentConnected));
+const Content = connect(mapStateToProps)(ContentConnected);
 
 export default Content;

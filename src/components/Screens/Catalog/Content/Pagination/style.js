@@ -15,4 +15,5 @@ export const NavButton = styled.button`
   align-items: center;
   font-size: 20px;
   border-radius: 15px;
+  border: ${props => (props.active ? '1px solid #c0c0c0' : 'none')};
 `;

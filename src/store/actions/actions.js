@@ -17,7 +17,8 @@ import {
   FETCH_DATA_SUCCESS,
   SHOW_POPUP,
   HIDE_POPUP,
-  UPDATE_FILTER_ROUTE
+  UPDATE_FILTER_ROUTE,
+  SAVE_FILTRED_CONTENT
 } from './action-types';
 
 export const updateBrands = brands => ({ type: UPDATE_BRANDS, brands });
@@ -45,27 +46,22 @@ export const fetchDataError = error => ({
   payload: error
 });
 
-export const buildFilterConfig = type => async dispatch => {
-  try {
-    const data = await Server.getData();
-    const config = getFilterBase(data, type);
-    dispatch({ type: BUILD_FILTER_CONFIG, config });
-  } catch (exc) {
-    dispatch(
-      fetchDataError('Sorry, the service is not available at this time')
-    );
-  }
+export const buildFilterConfig = (type, gender) => {
+  const { data } = Server;
+  const config = getFilterBase(data, type, gender);
+  return { type: BUILD_FILTER_CONFIG, config };
 };
 
-export const updateRoute = route => async dispatch => {
-  try {
-    return dispatch({ type: UPDATE_FILTER_ROUTE, route });
-  } catch (exc) {
-    return dispatch(
-      fetchDataError('Sorry, the service is not available at this time')
-    );
-  }
-};
+export const updateRouteParams = (route, gender) => ({
+  type: UPDATE_FILTER_ROUTE,
+  route,
+  gender
+});
+
+export const saveFilteredContent = data => ({
+  type: SAVE_FILTRED_CONTENT,
+  payload: data
+});
 
 export const fetchData = () => async dispatch => {
   dispatch(fetchDataStarted());

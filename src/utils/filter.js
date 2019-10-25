@@ -1,6 +1,6 @@
 import { findMinMax } from 'utils/utils';
 
-export const buildFIlterConfig = (data, type) => {
+export const buildFIlterConfig = (data, type, gender) => {
   const filterOfdata = data.filter(elem => {
     if (type === undefined || type === 'sale') return true;
     return elem.type === type;
@@ -26,6 +26,7 @@ export const buildFIlterConfig = (data, type) => {
     brandsList,
     pricesRange,
     sizesList,
+    gender,
     search: '',
     sortOrder: 'init'
   };

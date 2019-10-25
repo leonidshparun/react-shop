@@ -6,18 +6,19 @@ import axios from './axios';
 class Server {
   constructor() {
     this.data = null;
-    this.timer = null;
   }
 
   fetchData = () =>
     this.requestData()
       .catch(e => this.onError(e))
       .then(this.addImageUrls)
-      .then(this.onLoad);
+      .then(data => {
+        this.data = data;
+      });
 
-  onLoad = content => {
-    this.data = content;
-    this.timer = null;
+  requestData = async () => {
+    const response = await axios.get('/products.json');
+    return response.data;
   };
 
   onError = error => {
@@ -27,11 +28,6 @@ class Server {
   getData = async () => {
     if (!this.data) await this.fetchData();
     return this.data;
-  };
-
-  requestData = async () => {
-    const response = await axios.get('/products.json');
-    return response.data;
   };
 
   submitOrder = data => {
@@ -71,10 +67,7 @@ class Server {
     return product;
   };
 
-  getFiltredContent = async (config, match) => {
-    if (!this.data) await this.fetchData();
-    console.log('VERY HARD CALC');
-    const { type, gender } = match.params;
+  getFiltredContent = (config, type, gender) => {
     const filterConfig = {
       ...config,
       type,
