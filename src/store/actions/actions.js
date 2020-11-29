@@ -18,7 +18,8 @@ import {
   SHOW_POPUP,
   HIDE_POPUP,
   UPDATE_FILTER_ROUTE,
-  SAVE_FILTRED_CONTENT
+  SAVE_FILTRED_CONTENT,
+  CLEAR_CART
 } from './action-types';
 
 export const updateBrands = brands => ({ type: UPDATE_BRANDS, brands });
@@ -29,6 +30,8 @@ export const updateSearch = input => ({ type: UPDATE_SEARCH, input });
 
 export const addItemToCart = item => ({ type: ADD_ITEM, item });
 export const removeItemFromCart = pos => ({ type: REMOVE_ITEM, pos });
+
+export const clearCart = () => ({ type: CLEAR_CART });
 
 export const updateSortPrices = types => ({ type: UPDATE_SORT_PRICES, types });
 

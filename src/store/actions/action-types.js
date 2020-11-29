@@ -8,6 +8,7 @@ export const REMOVE_ITEM = 'REMOVE_ITEM';
 export const UPDATE_SORT_PRICES = 'UPDATE_SORT_PRICES';
 
 export const CHANGE_QUANTITY = 'CHANGE_QUANTITY';
+export const CLEAR_CART = 'CLEAR_CART';
 
 export const BUILD_FILTER_CONFIG = 'BUILD_FILTER_CONFIG';
 

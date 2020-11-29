@@ -8,7 +8,7 @@ import Alert from 'shared/Alert/Alert';
 import Spinner from 'shared/UI/Spinner/Spinner';
 
 import Button from 'shared/UI/Button/Button';
-import { showPopup } from 'store/actions/actions';
+import { clearCart, showPopup } from 'store/actions/actions';
 
 import Heading from './Heading/Heading';
 import Content from './Content/Content';
@@ -16,7 +16,7 @@ import Footer from './Footer/Footer';
 
 import { CartContainer, Table, CartHeading, OrderButtonWrapper } from './style';
 
-const CartConnected = ({ items, popup }) => {
+const CartConnected = ({ items, popup, clear }) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -58,6 +58,7 @@ const CartConnected = ({ items, popup }) => {
       customer: { data: 'customer data...' },
       timestamp: new Date().toISOString()
     });
+    clear();
   };
 
   const cart = items.length ? (
@@ -86,7 +87,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  popup: () => dispatch(showPopup('THANKS FOR YOUR ORDER'))
+  popup: () => dispatch(showPopup('THANKS FOR YOUR ORDER')),
+  clear: () => dispatch(clearCart())
 });
 
 const Cart = connect(mapStateToProps, mapDispatchToProps)(CartConnected);

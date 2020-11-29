@@ -1,7 +1,8 @@
 import {
   ADD_ITEM,
   REMOVE_ITEM,
-  CHANGE_QUANTITY
+  CHANGE_QUANTITY,
+  CLEAR_CART
 } from 'store/actions/action-types';
 
 const cartReducer = (state = [], action) => {
@@ -23,6 +24,9 @@ const cartReducer = (state = [], action) => {
         ...state.slice(action.pos + 1)
       ];
       return updatedItems;
+    }
+    case CLEAR_CART: {
+      return [];
     }
     case CHANGE_QUANTITY: {
       const { idx, quantity } = action.item;
