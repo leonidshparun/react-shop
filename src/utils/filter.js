@@ -59,7 +59,8 @@ export const filterData = (data, filterConfig) => {
           ? product.availableSizes.some(size => sizesList[size])
           : true) && // filter by sizes
         itemSearch.toLowerCase().includes(search.toLowerCase()) && // searchbar
-        (price >= min && price <= max) && // filter by prices
+        price >= min &&
+        price <= max && // filter by prices
         brandsList[product.brand] // filter by brands
       );
     })

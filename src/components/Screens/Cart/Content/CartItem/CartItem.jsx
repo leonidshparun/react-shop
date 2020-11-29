@@ -93,9 +93,6 @@ const mapDispatchToProps = dispatch => ({
   change: qnt => dispatch(changeQuantity(qnt))
 });
 
-const CartItem = connect(
-  null,
-  mapDispatchToProps
-)(CartItemConnected);
+const CartItem = connect(null, mapDispatchToProps)(CartItemConnected);
 
 export default memo(CartItem);

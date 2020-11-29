@@ -39,7 +39,10 @@ const LinkList = styled.ul`
 
 const who = {
   header: 'WHO?',
-  links: [{ title: 'Contact Us', path: '/' }, { title: 'About As', path: '/' }]
+  links: [
+    { title: 'Contact Us', path: '/' },
+    { title: 'About As', path: '/' }
+  ]
 };
 
 const offer = {

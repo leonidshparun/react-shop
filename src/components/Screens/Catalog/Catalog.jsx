@@ -71,8 +71,5 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(CatalogConnected)
+  connect(mapStateToProps, mapDispatchToProps)(CatalogConnected)
 );

@@ -89,9 +89,6 @@ const mapDispatchToProps = dispatch => ({
   popup: () => dispatch(showPopup('THANKS FOR YOUR ORDER'))
 });
 
-const Cart = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CartConnected);
+const Cart = connect(mapStateToProps, mapDispatchToProps)(CartConnected);
 
 export default Cart;

@@ -99,7 +99,4 @@ const mapDispatchToProps = dispatch => ({
   popup: () => dispatch(showPopup('THANKS'))
 });
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(NewsletterFormConnected);
+export default connect(null, mapDispatchToProps)(NewsletterFormConnected);
