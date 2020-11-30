@@ -53,7 +53,4 @@ const mapDispatchToProps = dispatch => ({
   hide: () => dispatch(hidePopup('THANKS'))
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PopupConnected);
+export default connect(mapStateToProps, mapDispatchToProps)(PopupConnected);

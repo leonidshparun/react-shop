@@ -46,6 +46,7 @@ export const filterData = (data, filterConfig) => {
   const showOnlyWithDiscount = type === 'sale';
   const productType = type !== 'sale' ? type : null;
   const [min, max] = pricesRange;
+
   const filtredData = data
     .filter(product => {
       const itemSearch = `${product.brand} ${product.title} ${product.style}`;

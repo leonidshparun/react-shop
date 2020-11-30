@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
-// import Spinner from 'shared/UI/Spinner/Spinner';
-
 import Alert from 'shared/Alert/Alert';
 import ProductList from './ProductList/ProductList';
 import Pagination from './Pagination/Pagination';
@@ -71,9 +69,7 @@ class ContentConnected extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  content: state.content
-});
+const mapStateToProps = ({ content }) => ({ content });
 
 const Content = connect(mapStateToProps)(ContentConnected);
 
